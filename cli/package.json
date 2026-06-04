@@ -1,0 +1,23 @@
+{
+  "name": "transpic-cli",
+  "version": "0.1.0",
+  "description": "A fast image manipulation CLI tool",
+  "main": "src/cli.js",
+  "bin": {
+    "transpic": "./src/cli.js"
+  },
+  "scripts": {
+    "build": "cargo build --release"
+  },
+  "keywords": [
+    "cli",
+    "image",
+    "manipulation",
+    "rust",
+    "blur",
+    "resize",
+    "transpic"
+  ],
+  "author": "Axtraz",
+  "license": "MIT"
+}

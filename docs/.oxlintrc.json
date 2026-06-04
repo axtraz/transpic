@@ -1,0 +1,37 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["import", "typescript", "unicorn"],
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "foo": "readonly"
+    },
+    "settings": {
+        "react": {
+            "version": "19.2.6"
+        },
+        "custom": {
+            "option": true
+        }
+    },
+    "rules": {
+        "eqeqeq": "warn",
+        "import/no-cycle": "error",
+        "react/self-closing-comp": [
+            "error",
+            {
+                "html": false
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "warn"
+            }
+        }
+    ],
+    "ignorePatterns": ["node_modules", ".next", "dist", "package-lock.json"]
+}

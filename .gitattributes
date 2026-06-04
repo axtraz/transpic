@@ -1,0 +1,18 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force LF line endings and handle merge conflicts for source files
+*.ts    text eol=lf merge=union
+*.tsx   text eol=lf merge=union
+*.rs    text eol=lf merge=union
+*.js    text eol=lf merge=union
+*.json  text eol=lf merge=union
+*.debug text eol=lf merge=union
+
+# Generated codes (Excluded from GitHub language statistics)
+core/index.js                         linguist-detectable=false
+core/index.d.ts                       linguist-detectable=false
+core/transpic.wasi-browser.js         linguist-detectable=false
+core/transpic.wasi.cjs                linguist-detectable=false
+core/wasi-worker-browser.mjs          linguist-detectable=false
+core/wasi-worker.mjs                  linguist-detectable=false

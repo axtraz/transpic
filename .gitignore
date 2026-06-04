@@ -1,0 +1,81 @@
+# ==========================================
+# GLOBAL DEPENDENCIES & ARTIFACTS
+# ==========================================
+# Blocks all node_modules directories anywhere in the project
+**/node_modules/
+# Blocks Rust Cargo build artifacts anywhere in the project
+**/target/
+# Blocks pnpm local store or state directories if generated locally
+**/.pnpm-store/
+
+# ==========================================
+# DIRECTORY SPECIFIC RULES
+# ==========================================
+
+# --- Directory: docs ---
+docs/.source
+docs/.next/
+docs/out/
+docs/build/
+docs/.vercel/
+docs/next-env.d.ts
+
+# --- Directory: core (Node & Cargo specific) ---
+core/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+core/pids
+core/*.pid
+core/*.seed
+core/*.pid.lock
+core/lib-cov
+core/.nyc_output
+core/.grunt
+core/bower_components
+core/.lock-wscript
+core/build/Release
+core/jspm_packages
+core/typings
+core/.npm
+core/.eslintcache
+core/.rpt2_cache/
+core/.rts2_cache_cjs/
+core/.rts2_cache_es/
+core/.rts2_cache_umd/
+core/.node_repl_history
+core/.cache
+core/.nuxt
+core/dist
+core/.vuepress/dist
+core/.serverless/
+core/.fusebox/
+core/.dynamodb/
+core/.tern-port
+core/.vscode-test
+core/Cargo.lock
+core/*.node
+core/npm
+
+# ==========================================
+# GLOBAL TOPTAL TEMPLATE & GENERAL RULES
+# ==========================================
+# Logs
+*.log
+logs/
+npm-debug.log*
+lerna-debug.log*
+
+# OS and Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Caches and generic builds
+*.tsbuildinfo
+coverage/
+*.lcov
+*.tgz
+
+# Environment Variables & Security
+.env
+.env.test
+.env*.local

@@ -1,0 +1,17 @@
+[package]
+name = "transpic-cli"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[profile.release]
+opt-level = 3
+panic = "abort"
+codegen-units = 1
+lto = true
+strip = "symbols"
+debug = false
+
+[dependencies]
+clap = { version = "4.6.1", features = ["derive"] }
+transpic-core = { path = "../core" }
