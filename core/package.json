@@ -97,12 +97,5 @@
       "__test__/**/*.js",
       "test/**/*.js"
     ]
-  },
-  "prettier": {
-    "printWidth": 120,
-    "semi": false,
-    "trailingComma": "all",
-    "singleQuote": true,
-    "arrowParens": "always"
   }
 }
