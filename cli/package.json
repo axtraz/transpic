@@ -7,7 +7,7 @@
     "transpic": "./src/cli.js"
   },
   "scripts": {
-    "build": "cargo build --release"
+    "build": "cargo build --release && node -e \"const fs = require('fs'); if (!fs.existsSync('./bin')) fs.mkdirSync('./bin'); const b = process.platform === 'win32' ? 'transpic-cli.exe' : 'transpic-cli'; fs.copyFileSync('./target/release/' + b, './bin/' + b);\""
   },
   "keywords": [
     "cli",
