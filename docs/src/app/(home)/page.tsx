@@ -18,6 +18,12 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
+const links = [
+    { label: "GitHub", href: "https://github.com/axtraz/transpic" },
+    { label: "npm", href: "/" },
+    { label: "Docs", href: "/docs" },
+];
+
 const features = [
     {
         icon: RefreshCw,
@@ -43,10 +49,10 @@ const features = [
 ];
 
 const examples = [
-    { label: "Convert format", command: "transpic-cli --path photo.jpg --format webp" },
-    { label: "Resize image", command: "transpic-cli --path photo.png --resize 800x600" },
-    { label: "Apply blur", command: "transpic-cli --path photo.jpg --blur 2 --grayscale" },
-    { label: "Chain everything", command: "transpic-cli --path photo.png --format webp --resize 1280x720 --grayscale" },
+    { label: "Convert format", command: "transpic --path photo.jpg --format webp" },
+    { label: "Resize image", command: "transpic --path photo.png --resize 800x600" },
+    { label: "Apply blur", command: "transpic --path photo.jpg --blur 2 --grayscale" },
+    { label: "Chain everything", command: "transpic --path photo.png --format webp --resize 1280x720 --grayscale" },
 ];
 
 const stats = [
@@ -327,12 +333,20 @@ export default function TranspicLanding() {
                 <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-xs text-zinc-600 sm:flex-row">
                     <div className="flex items-center gap-2">
                         <ImageIcon size={13} className="text-orange-400/60" />
-                        <span>transpic-cli — MIT License</span>
+                        <span>
+                            transpic-cli —{" "}
+                            <a
+                                href="https://github.com/axtraz/transpic/blob/main/LICENSE"
+                                className="transition-colors hover:text-zinc-300"
+                            >
+                                MIT License
+                            </a>
+                        </span>
                     </div>
                     <div className="flex items-center gap-5">
-                        {["GitHub", "npm", "Docs"].map(link => (
-                            <a key={link} href="#" className="transition-colors hover:text-zinc-300">
-                                {link}
+                        {links.map(link => (
+                            <a key={link.label} href={link.href} className="transition-colors hover:text-zinc-300">
+                                {link.label}
                             </a>
                         ))}
                     </div>
