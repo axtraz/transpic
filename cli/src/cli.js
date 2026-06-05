@@ -5,11 +5,11 @@ const path = require('path');
 const fs = require('fs');
 
 const binaryName = process.platform === 'win32' ? 'transpic-cli.exe' : 'transpic-cli';
-const binaryPath = path.join(__dirname, '..', 'target', 'release', binaryName);
+const binaryPath = path.join(__dirname, '..', 'bin', binaryName);
 
 if (!fs.existsSync(binaryPath)) {
   console.error("Error: Rust binary not found.");
-  console.error("Please run 'npm run build' or 'cargo build --release' first.");
+  console.error("Please make sure the package was built correctly.");
   process.exit(1);
 }
 
