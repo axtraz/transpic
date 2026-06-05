@@ -1,0 +1,72 @@
+---
+title: Troubleshooting
+description: Common errors and how to fix them.
+---
+
+### `error: required argument '--path' not provided`
+
+You forgot the required `--path` flag.
+
+```bash
+# ❌
+transpic --format webp
+
+# ✓
+transpic --path photo.jpg --format webp
+```
+
+---
+
+### `error: unsupported format "svg"`
+
+The requested format is not supported by `transpic`. Check the [Supported Formats](/docs/supported-formats) page for the full list of valid values.
+
+---
+
+### `error: invalid value for --rotate`
+
+`--rotate` only accepts `90`, `180`, or `270`. Any other value is rejected.
+
+```bash
+# ❌
+transpic --path photo.jpg --rotate 45
+
+# ✓
+transpic --path photo.jpg --rotate 90
+```
+
+---
+
+### `error: could not read file` / `No such file or directory`
+
+The path passed to `--path` doesn't exist or is misspelled. Double-check the path and ensure the file is accessible.
+
+```bash
+ls photo.jpg
+transpic --path photo.jpg --format webp
+```
+
+---
+
+### `error: could not decode image`
+
+The file is corrupted, truncated, or the extension doesn't match the actual content (e.g. a PNG renamed to `.jpg`). Verify the file is a valid image:
+
+```bash
+file photo.jpg   # should report "JPEG image data"
+```
+
+---
+
+### The output file is larger than the input
+
+This is expected in some cases — e.g. converting a JPEG to PNG is lossless and will almost always produce a larger file. Use a format suited for the target use case (WebP or AVIF for web, PNG for lossless editing).
+
+---
+
+### Memory issues with very large images
+
+Processing large RAW or TIFF files can be memory-intensive. If the process is killed by the OS, try:
+
+- Resizing the image first: `--resize 4096x0`
+- Ensuring you have enough free RAM (a 100 MP image can require several GB when decoded)

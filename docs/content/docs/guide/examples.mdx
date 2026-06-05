@@ -1,0 +1,75 @@
+---
+title: Examples
+description: Real-world usage examples for transpic.
+---
+
+## Convert a single image to WebP
+
+The most common use case — converting a photo for web delivery:
+
+```bash
+transpic --path hero.png --format webp
+# → hero.webp
+```
+
+---
+
+## Convert an entire folder to WebP
+
+`transpic` processes one file at a time, so use a shell loop to batch-convert a directory:
+
+```bash
+# Bash / Zsh
+for f in images/*.png; do
+  transpic --path "$f" --format webp
+done
+```
+
+```powershell
+# PowerShell
+Get-ChildItem images\*.png | ForEach-Object {
+  transpic --path $_.FullName --format webp
+}
+```
+
+---
+
+## Resize and convert in one pass
+
+Resize a photo to a thumbnail and convert to AVIF at the same time:
+
+```bash
+transpic --path photo.jpg --resize 400x300 --format avif
+```
+
+---
+
+## Create a grayscale copy
+
+```bash
+transpic --path portrait.jpg --grayscale --format png
+```
+
+---
+
+## Rotate a batch of incorrectly oriented images
+
+```bash
+for f in scans/*.tiff; do
+  transpic --path "$f" --rotate 90
+done
+```
+
+---
+
+## Apply multiple transformations at once
+
+Blur, grayscale, resize, and re-encode in a single command:
+
+```bash
+transpic --path raw.tiff \
+  --resize 800x600 \
+  --blur 1.5 \
+  --grayscale \
+  --format png
+```

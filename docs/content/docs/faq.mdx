@@ -1,0 +1,45 @@
+---
+title: FAQ
+description: Frequently asked questions about transpic.
+icon: CircleQuestionMark
+---
+
+### Does transpic preserve EXIF metadata?
+
+No. `transpic` strips all metadata during processing. This is a current limitation of the underlying `image` crate.
+
+---
+
+### Can I process multiple files in one command?
+
+Not yet — `transpic` takes a single `--path` input. Use a shell loop to process multiple files. See the [Examples](/docs/guide/examples#convert-an-entire-folder-to-webp) page for snippets.
+
+---
+
+### What order are transformations applied in?
+
+When multiple options are combined, they are applied in this fixed order:
+
+1. Resize
+2. Rotate
+3. Blur
+4. Grayscale
+5. Invert
+6. Format conversion / write
+
+---
+
+### Is there a config file to avoid repeating arguments?
+
+No. `transpic` is intentionally stateless — there is no config file. For repeated workflows, wrap your command in a shell alias or script.
+
+---
+
+### Where is the output file written?
+
+The output is written to the same directory as the input, with the new extension if `--format` was used. The original file is **not** overwritten.
+
+```
+photo.jpg  →  photo.webp   (with --format webp)
+photo.jpg  →  photo.jpg    (without --format, transformations applied in-place to a new file)
+```

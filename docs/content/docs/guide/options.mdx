@@ -1,0 +1,100 @@
+---
+title: Options
+description: All available CLI flags and options for transpic.
+---
+
+## Synopsis
+
+```bash
+transpic --path <file> [OPTIONS]
+```
+
+`--path` is the only required flag. All other options are optional and can be combined freely.
+
+## Flags
+
+### `--path <file>` _(required)_
+
+Path to the input image.
+
+```bash
+transpic --path photo.jpg
+```
+
+---
+
+### `--format <format>`
+
+Convert the image to the specified output format. The output file is written alongside the input with the new extension.
+
+```bash
+transpic --path photo.jpg --format webp
+# → photo.webp
+```
+
+See [Supported Formats](/docs/supported-formats) for the full list of valid values.
+
+---
+
+### `--resize <WxH>`
+
+Resize the image to the given dimensions. Both width and height are required and separated by `x`.
+
+```bash
+transpic --path photo.jpg --resize 1280x720
+```
+
+<Callout type="info">
+  Aspect ratio is **not** preserved automatically. If you want to constrain only one dimension, use `0` as a placeholder — e.g. `--resize 1280x0` to fix the width and derive the height proportionally.
+</Callout>
+
+---
+
+### `--rotate <degrees>`
+
+Rotate the image clockwise. Accepted values: `90`, `180`, `270`.
+
+```bash
+transpic --path photo.jpg --rotate 90
+```
+
+---
+
+### `--blur <intensity>`
+
+Apply a Gaussian blur. The value is a floating-point intensity.
+
+```bash
+transpic --path photo.jpg --blur 2.5
+```
+
+---
+
+### `--grayscale`
+
+Convert the image to grayscale.
+
+```bash
+transpic --path photo.jpg --grayscale
+```
+
+---
+
+### `--invert`
+
+Invert all pixel colors.
+
+```bash
+transpic --path photo.jpg --invert
+```
+
+---
+
+Options are applied in the following order regardless of how they are passed on the command line:
+
+1. Resize
+2. Rotate
+3. Blur
+4. Grayscale
+5. Invert
+6. Format conversion

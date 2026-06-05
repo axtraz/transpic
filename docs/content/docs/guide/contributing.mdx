@@ -1,0 +1,81 @@
+---
+title: Contributing
+description: How to contribute to transpic — bug reports, feature requests, and pull requests.
+---
+
+`transpic` is open source and contributions are welcome. The repository is hosted on GitHub.
+
+## Reporting a Bug
+
+1. Check the [existing issues](https://github.com/axtraz/transpic/issues) to avoid duplicates.
+2. Open a new issue and include:
+   - The exact command you ran
+   - The full error output
+   - Your OS and `transpic` version (`transpic --version`)
+   - A sample image if the bug is format-specific (attach or link it)
+
+---
+
+## Requesting a Feature
+
+Open an issue with the `enhancement` label. Describe:
+
+- **What** you want to do
+- **Why** the current CLI doesn't cover your use case
+- Any prior art or reference implementations if relevant
+
+---
+
+## Submitting a Pull Request
+
+### Prerequisites
+
+- [Rust](https://rustup.rs/) (stable toolchain)
+- [Node.js](https://nodejs.org/) ≥ 18 (for the npm package wrappers)
+
+### Setup
+
+```bash
+git clone https://github.com/axtraz/transpic.git
+cd transpic
+cargo build
+```
+
+### Project Structure
+
+```
+transpic/
+├── core/        # Library crate — pure image processing logic (no I/O)
+├── cli/         # Binary crate — argument parsing and file I/O
+├── docs/        # Documentation site
+└── ...          # Workspace root
+```
+
+New image processing logic goes in `core`. CLI flags and I/O handling go in `cli`.
+
+### Running Tests
+
+```bash
+cargo test
+```
+
+### Lint & Format
+
+The CI enforces formatting and Clippy warnings. Run these before pushing:
+
+```bash
+cargo fmt --all
+cargo clippy --all-targets --all-features
+```
+
+### Opening the PR
+
+- Target the `main` branch
+- Keep the scope focused — one feature or fix per PR
+- Update the relevant documentation pages if your change affects behaviour
+
+---
+
+## Code of Conduct
+
+Be respectful. Constructive feedback only.

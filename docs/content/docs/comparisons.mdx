@@ -24,14 +24,14 @@ transpic-cli is not trying to replace ImageMagick. It covers the most common use
 | Binary size | ~5MB | ~30MB+ |
 | Written in | Rust | C |
 | Syntax | Simple | Complex |
-| Conversion | ~2ms  ⚡ | ~75ms |
+| Conversion | ~10ms  ⚡ | ~40ms |
 | Open source | ✅ | ✅ |
 | No system dependencies | ✅ | ❌ |
 | npm install | ✅ | ❌ |
 | CI/CD friendly | ✅ | ⚠️ Setup required |
 | Memory usage | Low | High |
 
-transpic-cli is **~38x faster** than ImageMagick on a JPG → PNG conversion.
+transpic-cli is **~4x faster** than ImageMagick on a JPG → PNG conversion.
 
 If you've ever copy-pasted an ImageMagick command from Stack Overflow without fully understanding it, transpic-cli is for you.
 
@@ -40,5 +40,5 @@ If you've ever copy-pasted an ImageMagick command from Stack Overflow without fu
 convert input.png -resize 800x600 -colorspace Gray output.png
 
 # transpic-cli
-transpic-cli --path input.png --resize 800x600 --grayscale
+transpic --path input.png --resize 800x600 --grayscale
 ```

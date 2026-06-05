@@ -1,0 +1,35 @@
+---
+title: Supported Formats
+description: All image formats supported by transpic for reading and writing.
+---
+
+`transpic` supports a wide range of image formats. The table below lists each format, its file extensions, and relevant notes.
+
+## Format Reference
+
+| Format | Extension(s) | Notes |
+|--------|-------------|-------|
+| AVIF | `.avif` | AV1-based modern format with excellent compression and HDR support |
+| BMP | `.bmp` | Uncompressed Windows bitmap; widely compatible but large file sizes |
+| OpenEXR | `.exr` | High dynamic range format used in VFX and compositing pipelines |
+| Farbfeld | `.ff` | Minimal lossless format by suckless; 16-bit RGBA, no metadata |
+| GIF | `.gif` | Lossless 256-color format; supports animation |
+| Radiance HDR | `.hdr` | RGBE high dynamic range format for lighting and environment maps |
+| ICO | `.ico` | Windows icon container; may embed multiple sizes |
+| JPEG | `.jpeg`, `.jpg` | Lossy compressed format; ubiquitous for photos |
+| PNG | `.png` | Lossless compressed format with full alpha channel support |
+| PNM | `.pnm` | Portable anymap family (PBM/PGM/PPM); plain or binary encoding |
+| QOI | `.qoi` | Quite OK Image Format; fast lossless compression, simple spec |
+| TGA | `.tga` | Truevision TGA; lossless with optional RLE; common in game assets |
+| TIFF | `.tiff`, `.tif` | Flexible container supporting lossless and lossy encoding; multi-page capable |
+| WebP | `.webp` | Google's modern format supporting both lossy and lossless modes |
+
+## Notes
+
+<Callout type="info">
+  When an extension is ambiguous (e.g. `.pnm` covers PBM, PGM, and PPM), `transpic` detects the actual subtype from the file header.
+</Callout>
+
+<Callout type="warn">
+  Not all format pairs support lossless round-trips. Converting from a lossy format (e.g. JPEG) to a lossless one (e.g. PNG) preserves the already-degraded data, but does not recover lost quality.
+</Callout>
