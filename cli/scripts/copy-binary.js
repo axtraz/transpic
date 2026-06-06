@@ -13,10 +13,21 @@ if (!fs.existsSync(binDir)) {
     fs.mkdirSync(binDir, { recursive: true });
 }
 
+if (!fs.existsSync(source)) {
+    console.error(`Error: Source binary not found at ${source}`);
+    console.error(`Please run 'cargo build --release' first on this platform.`);
+    process.exit(1);
+}
+
 try {
     fs.copyFileSync(source, destination);
     console.log(`✓ Binary successfully copied to: ${destination}`);
+
+    if (process.platform !== 'win32') {
+        fs.chmodSync(destination, '755');
+        console.log(`✓ Execution permissions (chmod 755) applied.`);
+    }
 } catch (err) {
-    console.error(`Error copying binary: ${err.message}`);
+    console.error(`Error during binary deployment: ${err.message}`);
     process.exit(1);
 }
