@@ -1,1 +1,8 @@
-/target
+# Exclude Rust build files
+target/
+
+# Exclude examples files
+examples/
+
+# Exclude development lock files
+Cargo.lock
