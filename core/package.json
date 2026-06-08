@@ -99,5 +99,21 @@
       "__test__/**/*.js",
       "test/**/*.js"
     ]
+  },
+  "optionalDependencies": {
+    "transpic-core-win32-x64-msvc": "0.1.0",
+    "transpic-core-darwin-x64": "0.1.0",
+    "transpic-core-linux-x64-gnu": "0.1.0",
+    "transpic-core-linux-x64-musl": "0.1.0",
+    "transpic-core-linux-arm64-gnu": "0.1.0",
+    "transpic-core-win32-ia32-msvc": "0.1.0",
+    "transpic-core-linux-arm-gnueabihf": "0.1.0",
+    "transpic-core-darwin-arm64": "0.1.0",
+    "transpic-core-android-arm64": "0.1.0",
+    "transpic-core-freebsd-x64": "0.1.0",
+    "transpic-core-linux-arm64-musl": "0.1.0",
+    "transpic-core-win32-arm64-msvc": "0.1.0",
+    "transpic-core-android-arm-eabi": "0.1.0",
+    "transpic-core-wasm32-wasi": "0.1.0"
   }
 }
