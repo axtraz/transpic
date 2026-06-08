@@ -1,0 +1,28 @@
+# Rust
+src/
+target/
+build.rs
+Cargo.toml
+Cargo.lock
+rustfmt.toml
+
+# Config
+.cargo/
+.github/
+.husky/
+.editorconfig
+.taplo.toml
+oxfmt.config.ts
+oxlint.config.ts
+pnpm-workspace.yaml
+pnpm-lock.yaml
+
+# Tests
+__test__/
+
+# Dev files
+*.ts
+!*.d.ts
+
+# Misc
+node_modules/
