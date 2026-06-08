@@ -1,6 +1,6 @@
 {
   "name": "transpic-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "High-performance image manipulation library for Node.js, powered by Rust and napi-rs.",
   "main": "index.js",
   "repository": {
@@ -55,8 +55,8 @@
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
-    "format": "run-p format:prettier format:rs format:toml",
-    "format:prettier": "prettier . -w",
+    "format": "run-p format:oxfmt format:rs format:toml",
+    "format:prettier": "oxfmt . -w",
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint .",

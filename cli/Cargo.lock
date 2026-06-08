@@ -1173,7 +1173,7 @@ dependencies = [
 
 [[package]]
 name = "transpic-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "image",
  "napi",
