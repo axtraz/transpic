@@ -51,7 +51,6 @@ core/.dynamodb/
 core/.tern-port
 core/.vscode-test
 core/Cargo.lock
-core/*.node
 core/npm
 
 # ==========================================
