@@ -2,8 +2,8 @@
 /* eslint-disable */
 export interface NapiImageOptions {
   blur?: number
-  grayscale: boolean
-  invert: boolean
+  grayscale?: boolean
+  invert?: boolean
   resize?: string
   rotate?: number
   outputFormat?: string

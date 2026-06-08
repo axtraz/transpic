@@ -22,10 +22,10 @@ struct Cli {
     blur: Option<f32>,
 
     #[arg(long, help = "Grayscale the image, example: --grayscale")]
-    grayscale: bool,
+    grayscale: Option<bool>,
 
     #[arg(long, help = "Invert the image colors, example: --invert")]
-    invert: bool,
+    invert: Option<bool>,
 
     #[arg(long, help = "Resize the image, example: --resize 800x600")]
     resize: Option<String>,
@@ -50,8 +50,8 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
 
     if cli.format.is_none()
         && cli.blur.is_none()
-        && !cli.grayscale
-        && !cli.invert
+        && !cli.grayscale.unwrap_or(false)
+        && !cli.invert.unwrap_or(false)
         && cli.resize.is_none()
         && cli.rotate.is_none()
     {

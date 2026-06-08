@@ -14,8 +14,8 @@ pub mod rotate;
 
 pub struct ImageOptions {
   pub blur: Option<f32>,
-  pub grayscale: bool,
-  pub invert: bool,
+  pub grayscale: Option<bool>,
+  pub invert: Option<bool>,
   pub resize: Option<String>,
   pub rotate: Option<u32>,
   pub output_format: Option<String>,
@@ -39,11 +39,11 @@ pub fn process_image(
     img = blur::blur(img, sigma);
   }
 
-  if options.grayscale {
+  if options.grayscale.unwrap_or(false) {
     img = grayscale::grayscale(img);
   }
 
-  if options.invert {
+  if options.invert.unwrap_or(false) {
     img = invert::invert(img);
   }
 
@@ -103,8 +103,8 @@ pub fn process_image(
 #[napi(object)]
 pub struct NapiImageOptions {
   pub blur: Option<f64>,
-  pub grayscale: bool,
-  pub invert: bool,
+  pub grayscale: Option<bool>,
+  pub invert: Option<bool>,
   pub resize: Option<String>,
   pub rotate: Option<u32>,
   pub output_format: Option<String>,
