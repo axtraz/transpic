@@ -1,6 +1,6 @@
 {
   "name": "transpic-cli",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A fast image manipulation CLI tool",
   "main": "src/cli.js",
   "bin": {
