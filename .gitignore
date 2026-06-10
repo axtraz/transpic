@@ -52,6 +52,8 @@ core/.tern-port
 core/.vscode-test
 core/Cargo.lock
 core/npm
+core/__test__/
+core/benchmark/
 
 # ==========================================
 # GLOBAL TOPTAL TEMPLATE & GENERAL RULES

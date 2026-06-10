@@ -1,12 +1,11 @@
 
 [package]
 authors = ["Axtraz"]
-edition = "2021"
-name = "transpic-core"
-version = "0.1.1"
+edition = "2024"
+name = "transpic_core"
+version = "0.1.3"
 
 [lib]
-name = "transpic_core"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]

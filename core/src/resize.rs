@@ -1,4 +1,4 @@
-use image::{imageops::FilterType, DynamicImage};
+use image::{DynamicImage, imageops::FilterType};
 
 pub fn resize(img: DynamicImage, size_str: &str) -> Result<DynamicImage, String> {
   let parts: Vec<&str> = size_str.split('x').collect();

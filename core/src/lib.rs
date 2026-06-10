@@ -91,7 +91,7 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
         return Err(NapiError::new(
           Status::GenericFailure,
           format!("Unsupported output format: {}", unsupported),
-        ))
+        ));
       }
     }
   } else {

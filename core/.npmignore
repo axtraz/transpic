@@ -26,3 +26,6 @@ __test__/
 
 # Misc
 node_modules/
+
+# Images
+assets/images/

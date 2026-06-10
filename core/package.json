@@ -1,117 +1,91 @@
 {
-  "name": "transpic-core",
-  "version": "0.1.2",
-  "description": "High-performance image manipulation library for Node.js, powered by Rust and napi-rs.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/axtraz/transpic.git"
-  },
-  "license": "MIT",
-  "browser": "browser.js",
-  "keywords": [
-    "image",
-    "image-processing",
-    "resize",
-    "blur",
-    "grayscale",
-    "convert",
-    "rust",
-    "napi-rs"
-  ],
-  "files": [
-    "index.d.ts",
-    "index.js",
-    "browser.js"
-  ],
-  "napi": {
-    "binaryName": "transpic",
-    "targets": [
-      "x86_64-pc-windows-msvc",
-      "x86_64-apple-darwin",
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl",
-      "aarch64-unknown-linux-gnu",
-      "i686-pc-windows-msvc",
-      "armv7-unknown-linux-gnueabihf",
-      "aarch64-apple-darwin",
-      "aarch64-linux-android",
-      "x86_64-unknown-freebsd",
-      "aarch64-unknown-linux-musl",
-      "aarch64-pc-windows-msvc",
-      "armv7-linux-androideabi",
-      "wasm32-wasip1-threads"
-    ]
-  },
-  "engines": {
-    "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "scripts": {
-    "artifacts": "napi artifacts",
-    "build": "napi build --platform --release",
-    "build:debug": "napi build --platform",
-    "format": "run-p format:oxfmt format:rs format:toml",
-    "format:oxfmt": "oxfmt .",
-    "format:toml": "taplo format",
-    "format:rs": "cargo fmt",
-    "lint": "oxlint .",
-    "prepublishOnly": "napi prepublish -t npm",
-    "test": "ava",
-    "preversion": "napi build --platform && git add .",
-    "version": "napi version",
-    "prepare": "cd .. && husky"
-  },
-  "devDependencies": {
-    "@emnapi/core": "^1.10.0",
-    "@emnapi/runtime": "^1.10.0",
-    "@napi-rs/cli": "^3.7.0",
-    "@oxc-node/core": "^0.1.0",
-    "@taplo/cli": "^0.7.0",
-    "@tybys/wasm-util": "^0.10.2",
-    "chalk": "^5.6.2",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.7",
-    "npm-run-all2": "^9.0.1",
-    "oxfmt": "^0.53.0",
-    "oxlint": "^1.68.0",
-    "oxlint-tsgolint": "^0.23.0",
-    "typescript": "^6.0.3"
-  },
-  "lint-staged": {
-    "*.@(js|ts|tsx)": [
-      "oxlint --fix"
+    "name": "transpic-core",
+    "version": "0.1.3",
+    "description": "Template project for writing node package with napi-rs",
+    "keywords": [
+        "N-API",
+        "NAPI",
+        "Rust",
+        "napi-rs",
+        "node-addon",
+        "node-addon-api"
     ],
-    "*.@(js|ts|tsx|yml|yaml|md|json)": [
-      "prettier --write"
-    ],
-    "*.toml": [
-      "taplo format"
-    ]
-  },
-  "ava": {
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/axtraz/transpic.git"
+    },
     "files": [
-      "__test__/**/*.js",
-      "test/**/*.js"
-    ]
-  },
-  "optionalDependencies": {
-    "transpic-core-android-arm-eabi": "0.1.2",
-    "transpic-core-android-arm64": "0.1.2",
-    "transpic-core-darwin-arm64": "0.1.2",
-    "transpic-core-darwin-x64": "0.1.2",
-    "transpic-core-freebsd-x64": "0.1.2",
-    "transpic-core-linux-arm-gnueabihf": "0.1.2",
-    "transpic-core-linux-arm64-gnu": "0.1.2",
-    "transpic-core-linux-arm64-musl": "0.1.2",
-    "transpic-core-linux-x64-gnu": "0.1.2",
-    "transpic-core-linux-x64-musl": "0.1.2",
-    "transpic-core-wasm32-wasi": "0.1.2",
-    "transpic-core-win32-arm64-msvc": "0.1.2",
-    "transpic-core-win32-ia32-msvc": "0.1.2",
-    "transpic-core-win32-x64-msvc": "0.1.2"
-  }
+        "index.d.ts",
+        "index.js"
+    ],
+    "main": "index.js",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "scripts": {
+        "artifacts": "napi artifacts",
+        "build": "napi build --platform --release",
+        "build:debug": "napi build --platform",
+        "format": "run-p format:oxfmt format:rs format:toml",
+        "format:oxfmt": "oxfmt .",
+        "format:toml": "taplo format",
+        "format:rs": "cargo fmt",
+        "lint": "oxlint .",
+        "prepublishOnly": "napi prepublish -t npm",
+        "test": "ava",
+        "preversion": "napi build --platform && git add .",
+        "version": "napi version",
+        "prepare": "cd .. && husky"
+    },
+    "devDependencies": {
+        "@emnapi/core": "^1.5.0",
+        "@emnapi/runtime": "^1.5.0",
+        "@napi-rs/cli": "^3.2.0",
+        "@taplo/cli": "^0.7.0",
+        "@tybys/wasm-util": "^0.10.0",
+        "ava": "^8.0.0",
+        "chalk": "^5.6.2",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.0.0",
+        "npm-run-all2": "^8.0.4",
+        "oxfmt": "^0.54.0",
+        "oxlint": "^1.69.0",
+        "oxlint-tsgolint": "^0.23.0",
+        "tinybench": "^6.0.0",
+        "typescript": "^6.0.0"
+    },
+    "lint-staged": {
+        "*.@(js|ts|tsx)": [
+            "oxlint --fix"
+        ],
+        "*.@(js|ts|tsx|yml|yaml|md|json)": [
+            "oxfmt"
+        ],
+        "*.toml": [
+            "taplo format"
+        ]
+    },
+    "napi": {
+        "binaryName": "transpic-core",
+        "targets": [
+            "x86_64-pc-windows-msvc",
+            "x86_64-apple-darwin",
+            "x86_64-unknown-linux-gnu",
+            "x86_64-unknown-linux-musl",
+            "aarch64-unknown-linux-gnu",
+            "aarch64-apple-darwin",
+            "aarch64-unknown-linux-musl",
+            "aarch64-pc-windows-msvc"
+        ]
+    },
+    "ava": {
+        "timeout": "2m",
+        "workerThreads": false
+    },
+    "engines": {
+        "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
+    },
+    "packageManager": "pnpm@11.5.2"
 }
