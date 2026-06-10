@@ -21,3 +21,6 @@ catalog:
 
 allowBuilds:
   "@napi-rs/cli": true
+
+minimumReleaseAgeExclude:
+  - '@napi-rs/wasm-runtime@1.1.5'
