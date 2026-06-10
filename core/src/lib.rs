@@ -27,14 +27,27 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
   let input_path = Path::new(&input_path);
 
   let reader = ImageReader::open(input_path)
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to open image '{}': {}", input_path.display(), e)))?
+    .map_err(|e| {
+      NapiError::new(
+        Status::GenericFailure,
+        format!("Failed to open image '{}': {}", input_path.display(), e),
+      )
+    })?
     .with_guessed_format()
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to guess image format: {}", e)))?;
+    .map_err(|e| {
+      NapiError::new(
+        Status::GenericFailure,
+        format!("Failed to guess image format: {}", e),
+      )
+    })?;
 
   let original_format = reader.format();
-  let mut img = reader
-    .decode()
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to decode image: {}", e)))?;
+  let mut img = reader.decode().map_err(|e| {
+    NapiError::new(
+      Status::GenericFailure,
+      format!("Failed to decode image: {}", e),
+    )
+  })?;
 
   if let Some(sigma) = options.blur {
     img = blur::blur(img, sigma as f32);
@@ -74,33 +87,60 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
       "tga" => ImageFormat::Tga,
       "tiff" | "tif" => ImageFormat::Tiff,
       "webp" => ImageFormat::WebP,
-      unsupported => return Err(NapiError::new(Status::GenericFailure, format!("Unsupported output format: {}", unsupported))),
+      unsupported => {
+        return Err(NapiError::new(
+          Status::GenericFailure,
+          format!("Unsupported output format: {}", unsupported),
+        ))
+      }
     }
   } else {
-    original_format.ok_or_else(|| NapiError::new(Status::GenericFailure, "Could not determine original image format."))?
+    original_format.ok_or_else(|| {
+      NapiError::new(
+        Status::GenericFailure,
+        "Could not determine original image format.",
+      )
+    })?
   };
 
   let mut bytes: Vec<u8> = Vec::new();
   img
     .write_to(&mut Cursor::new(&mut bytes), out_fmt)
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to encode image to requested format: {}", e)))?;
+    .map_err(|e| {
+      NapiError::new(
+        Status::GenericFailure,
+        format!("Failed to encode image to requested format: {}", e),
+      )
+    })?;
 
   let stem = input_path
     .file_stem()
     .to_owned()
-    .ok_or_else(|| NapiError::new(Status::GenericFailure, "Could not read the source file name"))?
+    .ok_or_else(|| {
+      NapiError::new(
+        Status::GenericFailure,
+        "Could not read the source file name",
+      )
+    })?
     .to_string_lossy()
     .into_owned();
 
   let ext = out_fmt.extensions_str().first().copied().unwrap_or("bin");
   let filename = format!("{}.{}", stem, ext);
 
-  let mut file = File::create(&filename)
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to create file '{}': {}", filename, e)))?;
-    
-  file
-    .write_all(&bytes)
-    .map_err(|e| NapiError::new(Status::GenericFailure, format!("Failed to write data to file: {}", e)))?;
+  let mut file = File::create(&filename).map_err(|e| {
+    NapiError::new(
+      Status::GenericFailure,
+      format!("Failed to create file '{}': {}", filename, e),
+    )
+  })?;
+
+  file.write_all(&bytes).map_err(|e| {
+    NapiError::new(
+      Status::GenericFailure,
+      format!("Failed to write data to file: {}", e),
+    )
+  })?;
 
   Ok(filename)
 }
