@@ -64,7 +64,7 @@
     "test": "ava",
     "preversion": "napi build --platform && git add .",
     "version": "napi version",
-    "prepare": "husky"
+    "prepare": "cd .. && husky"
   },
   "devDependencies": {
     "@emnapi/core": "^1.10.0",
@@ -73,14 +73,12 @@
     "@oxc-node/core": "^0.1.0",
     "@taplo/cli": "^0.7.0",
     "@tybys/wasm-util": "^0.10.2",
-    "ava": "^8.0.1",
     "chalk": "^5.6.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "npm-run-all2": "^9.0.1",
     "oxfmt": "^0.53.0",
     "oxlint": "^1.68.0",
-    "tinybench": "^6.0.2",
     "typescript": "^6.0.3"
   },
   "lint-staged": {
@@ -101,19 +99,19 @@
     ]
   },
   "optionalDependencies": {
-    "transpic-core-win32-x64-msvc": "0.1.0",
-    "transpic-core-darwin-x64": "0.1.0",
-    "transpic-core-linux-x64-gnu": "0.1.0",
-    "transpic-core-linux-x64-musl": "0.1.0",
-    "transpic-core-linux-arm64-gnu": "0.1.0",
-    "transpic-core-win32-ia32-msvc": "0.1.0",
-    "transpic-core-linux-arm-gnueabihf": "0.1.0",
-    "transpic-core-darwin-arm64": "0.1.0",
-    "transpic-core-android-arm64": "0.1.0",
-    "transpic-core-freebsd-x64": "0.1.0",
-    "transpic-core-linux-arm64-musl": "0.1.0",
-    "transpic-core-win32-arm64-msvc": "0.1.0",
-    "transpic-core-android-arm-eabi": "0.1.0",
-    "transpic-core-wasm32-wasi": "0.1.0"
+    "transpic-core-android-arm-eabi": "0.1.1",
+    "transpic-core-android-arm64": "0.1.1",
+    "transpic-core-darwin-arm64": "0.1.1",
+    "transpic-core-darwin-x64": "0.1.1",
+    "transpic-core-freebsd-x64": "0.1.1",
+    "transpic-core-linux-arm-gnueabihf": "0.1.1",
+    "transpic-core-linux-arm64-gnu": "0.1.1",
+    "transpic-core-linux-arm64-musl": "0.1.1",
+    "transpic-core-linux-x64-gnu": "0.1.1",
+    "transpic-core-linux-x64-musl": "0.1.1",
+    "transpic-core-wasm32-wasi": "0.1.1",
+    "transpic-core-win32-arm64-msvc": "0.1.1",
+    "transpic-core-win32-ia32-msvc": "0.1.1",
+    "transpic-core-win32-x64-msvc": "0.1.1"
   }
 }

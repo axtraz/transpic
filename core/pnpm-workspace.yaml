@@ -1,41 +1,23 @@
-minimumReleaseAgeExclude:
-  - '@oxlint/binding-android-arm-eabi@1.68.0'
-  - '@oxlint/binding-android-arm64@1.68.0'
-  - '@oxlint/binding-darwin-arm64@1.68.0'
-  - '@oxlint/binding-darwin-x64@1.68.0'
-  - '@oxlint/binding-freebsd-x64@1.68.0'
-  - '@oxlint/binding-linux-arm-gnueabihf@1.68.0'
-  - '@oxlint/binding-linux-arm-musleabihf@1.68.0'
-  - '@oxlint/binding-linux-arm64-gnu@1.68.0'
-  - '@oxlint/binding-linux-arm64-musl@1.68.0'
-  - '@oxlint/binding-linux-ppc64-gnu@1.68.0'
-  - '@oxlint/binding-linux-riscv64-gnu@1.68.0'
-  - '@oxlint/binding-linux-riscv64-musl@1.68.0'
-  - '@oxlint/binding-linux-s390x-gnu@1.68.0'
-  - '@oxlint/binding-linux-x64-gnu@1.68.0'
-  - '@oxlint/binding-linux-x64-musl@1.68.0'
-  - '@oxlint/binding-openharmony-arm64@1.68.0'
-  - '@oxlint/binding-win32-arm64-msvc@1.68.0'
-  - '@oxlint/binding-win32-ia32-msvc@1.68.0'
-  - '@oxlint/binding-win32-x64-msvc@1.68.0'
-  - oxlint@1.68.0
-  - '@oxfmt/binding-android-arm-eabi@0.53.0'
-  - '@oxfmt/binding-android-arm64@0.53.0'
-  - '@oxfmt/binding-darwin-arm64@0.53.0'
-  - '@oxfmt/binding-darwin-x64@0.53.0'
-  - '@oxfmt/binding-freebsd-x64@0.53.0'
-  - '@oxfmt/binding-linux-arm-gnueabihf@0.53.0'
-  - '@oxfmt/binding-linux-arm-musleabihf@0.53.0'
-  - '@oxfmt/binding-linux-arm64-gnu@0.53.0'
-  - '@oxfmt/binding-linux-arm64-musl@0.53.0'
-  - '@oxfmt/binding-linux-ppc64-gnu@0.53.0'
-  - '@oxfmt/binding-linux-riscv64-gnu@0.53.0'
-  - '@oxfmt/binding-linux-riscv64-musl@0.53.0'
-  - '@oxfmt/binding-linux-s390x-gnu@0.53.0'
-  - '@oxfmt/binding-linux-x64-gnu@0.53.0'
-  - '@oxfmt/binding-linux-x64-musl@0.53.0'
-  - '@oxfmt/binding-openharmony-arm64@0.53.0'
-  - '@oxfmt/binding-win32-arm64-msvc@0.53.0'
-  - '@oxfmt/binding-win32-ia32-msvc@0.53.0'
-  - '@oxfmt/binding-win32-x64-msvc@0.53.0'
-  - oxfmt@0.53.0
+packages:
+  - '.'
+  - 'npm/*'
+
+catalog:
+  "@emnapi/core": "1.10.0"
+  "@emnapi/runtime": "1.10.0"
+  "@napi-rs/cli": "3.7.0"
+  "@oxc-node/core": "^0.1.0"
+  "@taplo/cli": "^0.7.0"
+  "@tybys/wasm-util": "0.10.2"
+  "ava": "8.0.1"
+  "chalk": "^5.6.2"
+  "husky": "^9.1.7"
+  "lint-staged": "^17.0.7"
+  "npm-run-all2": "^9.0.1"
+  "oxfmt": "^0.54.0"
+  "oxlint": "^1.66.0"
+  "tinybench": "^6.0.2"
+  "typescript": "6.0.3"
+
+allowBuilds:
+  "@napi-rs/cli": true
