@@ -22,5 +22,17 @@ export default defineConfig({
         "no-shadow": "off",
         "unicorn/no-empty-file": "off",
     },
-    ignorePatterns: ["target", "node_modules", "index.js", "package-template.wasi-browser.js", "package-template.wasi.cjs", "wasi-worker-browser.mjs", "wasi-worker.mjs", ".pnpm-lock.yaml"],
+    ignorePatterns: [
+        "target",
+        "node_modules",
+        "index.js",
+        "transpic.wasi-browser.js",
+        "transpic.wasi.cjs",
+        "browser.js",
+        "package-template.wasi-browser.js",
+        "package-template.wasi.cjs",
+        "wasi-worker-browser.mjs",
+        "wasi-worker.mjs",
+        ".pnpm-lock.yaml",
+    ],
 });

@@ -9,5 +9,17 @@ export default defineConfig({
     sortImports: {
         newlinesBetween: false,
     },
-    ignorePatterns: ["target", "node_modules", "index.js", "package-template.wasi-browser.js", "package-template.wasi.cjs", "wasi-worker-browser.mjs", "wasi-worker.mjs", ".pnpm-lock.yaml"],
+    ignorePatterns: [
+        "target",
+        "node_modules",
+        "index.js",
+        "transpic.wasi-browser.js",
+        "transpic.wasi.cjs",
+        "browser.js",
+        "package-template.wasi-browser.js",
+        "package-template.wasi.cjs",
+        "wasi-worker-browser.mjs",
+        "wasi-worker.mjs",
+        ".pnpm-lock.yaml",
+    ],
 });
