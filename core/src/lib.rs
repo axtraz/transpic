@@ -8,6 +8,7 @@ use napi_derive::napi;
 
 pub mod blur;
 pub mod grayscale;
+pub mod huerotate;
 pub mod invert;
 pub mod resize;
 pub mod rotate;
@@ -16,6 +17,7 @@ pub mod rotate;
 pub struct ImageOptions {
   pub blur: Option<f64>,
   pub grayscale: Option<bool>,
+  pub huerotate: Option<i32>,
   pub invert: Option<bool>,
   pub resize: Option<String>,
   pub rotate: Option<u32>,
@@ -55,6 +57,11 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
 
   if options.grayscale.unwrap_or(false) {
     img = grayscale::grayscale(img);
+  }
+
+  if let Some(degrees) = options.huerotate {
+    img =
+      huerotate::huerotate(img, degrees).map_err(|e| NapiError::new(Status::GenericFailure, e))?;
   }
 
   if options.invert.unwrap_or(false) {
