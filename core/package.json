@@ -1,6 +1,6 @@
 {
     "name": "transpic-core",
-    "version": "0.2.0",
+    "version": "0.2.2",
     "description": "Template project for writing node package with napi-rs",
     "keywords": [
         "N-API",
