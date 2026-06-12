@@ -78,7 +78,7 @@ jobs:
                   image: ${{ matrix.docker }}
                   options: -v ${{ github.workspace }}:/workspace -w /workspace/core
                   run: |
-                      corepack enable
+                      npm install -g pnpm
                       pnpm install --no-frozen-lockfile
                       ${{ matrix.build }}
 
