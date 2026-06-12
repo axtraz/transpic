@@ -63,7 +63,7 @@ jobs:
 
       - name: Install deps
         working-directory: core
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build (native)
         if: ${{ !matrix.docker }}
@@ -78,7 +78,7 @@ jobs:
           options: -v ${{ github.workspace }}:/workspace -w /workspace/core
           run: |
             corepack enable
-            pnpm install --frozen-lockfile
+            pnpm install --no-frozen-lockfile
             ${{ matrix.build }}
 
       - name: Upload artifact
@@ -150,7 +150,7 @@ jobs:
 
       - name: Install deps
         working-directory: core
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Download core artifacts
         uses: actions/download-artifact@v4
