@@ -15,30 +15,37 @@ jobs:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             build: pnpm build
+
           - os: windows-latest
             target: aarch64-pc-windows-msvc
             build: pnpm build --target aarch64-pc-windows-msvc
+
           - os: macos-13
             target: x86_64-apple-darwin
-            build: pnpm build --target x86_64-apple-darwin
+            build: pnpm build
+
           - os: macos-latest
             target: aarch64-apple-darwin
-            build: pnpm build --target aarch64-apple-darwin
+            build: pnpm build
+
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             build: pnpm build --target x86_64-unknown-linux-gnu
+
           - os: ubuntu-latest
             target: x86_64-unknown-linux-musl
             build: pnpm build --target x86_64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:22-alpine
+            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
+
           - os: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             build: pnpm build --target aarch64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:22-debian-aarch64
+            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
+
           - os: ubuntu-latest
             target: aarch64-unknown-linux-musl
             build: pnpm build --target aarch64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:22-alpine
+            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
 
     name: Build ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
@@ -76,7 +83,9 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ matrix.docker }}
-          options: -v ${{ github.workspace }}:/workspace -w /workspace/core -e COREPACK_ENABLE_DOWNLOADS=0 -e COREPACK_INTEGRITY_KEYS=0
+          options: >-
+            -v ${{ github.workspace }}:/workspace
+            -w /workspace/core
           run: |
             npm install -g pnpm --force
             pnpm install --no-frozen-lockfile
@@ -97,6 +106,7 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             binary: transpic-cli
+
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             binary: transpic-cli.exe
