@@ -1,7 +1,7 @@
 use image::{ImageFormat, ImageReader};
 use std::fs::File;
 use std::io::{Cursor, Write};
-use std::path::Path;
+use std::path::PathBuf;
 
 use napi::{Error as NapiError, Status};
 use napi_derive::napi;
@@ -26,9 +26,9 @@ pub struct ImageOptions {
 
 #[napi(js_name = "processImage")]
 pub fn process_image(input_path: String, options: ImageOptions) -> Result<String, NapiError> {
-  let input_path = Path::new(&input_path);
+  let input_path = PathBuf::from(input_path);
 
-  let reader = ImageReader::open(input_path)
+  let reader = ImageReader::open(&input_path)
     .map_err(|e| {
       NapiError::new(
         Status::GenericFailure,
@@ -122,7 +122,6 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
 
   let stem = input_path
     .file_stem()
-    .to_owned()
     .ok_or_else(|| {
       NapiError::new(
         Status::GenericFailure,
