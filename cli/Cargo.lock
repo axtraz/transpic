@@ -1165,7 +1165,7 @@ dependencies = [
 
 [[package]]
 name = "transpic-cli"
-version = "0.1.6"
+version = "0.2.0"
 dependencies = [
  "clap",
  "transpic_core",
