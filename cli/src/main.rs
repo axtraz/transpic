@@ -64,7 +64,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let options = ImageOptions {
-        blur: cli.blur ,
+        blur: cli.blur.map(|b| b as f64),
         grayscale: cli.grayscale,
         huerotate: cli.huerotate,
         invert: cli.invert,
