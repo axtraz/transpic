@@ -3,9 +3,8 @@ name: Publish
 on:
   push:
     tags:
-      - "core-v[0-9]*"
-      - "cli-v[0-9]*"
-      - "core-v[0-9]*-cli-v[0-9]*"
+      - "v[0-9]*"
+      - "*-v[0-9]*"
 
 jobs:
   build:
@@ -111,6 +110,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build Rust binary
+        working-directory: cli
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Move binary to expected folder
+        working-directory: cli
+        shell: bash
+        run: |
+          mkdir -p target/release
+          cp target/${{ matrix.target }}/release/${{ matrix.binary }} target/release/
 
       - name: Copy binary
         working-directory: cli
