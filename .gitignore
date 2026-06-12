@@ -50,7 +50,6 @@ core/.fusebox/
 core/.dynamodb/
 core/.tern-port
 core/.vscode-test
-core/npm
 core/__test__/
 core/benchmark/
 
