@@ -50,11 +50,9 @@ core/.fusebox/
 core/.dynamodb/
 core/.tern-port
 core/.vscode-test
-core/Cargo.lock
 core/npm
 core/__test__/
 core/benchmark/
-core/bin/
 
 # ==========================================
 # GLOBAL TOPTAL TEMPLATE & GENERAL RULES
@@ -81,3 +79,7 @@ coverage/
 .env
 .env.test
 .env*.local
+
+# Global
+**/Cargo.lock
+**/bin
