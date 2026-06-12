@@ -73,7 +73,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         output_format: cli.format,
     };
 
-    let saved_filename = process_image(&cli.path, options)?;
+    let saved_filename = process_image(cli.path.to_string_lossy().to_string(), options)?;
 
     let duration = start.elapsed();
     println!(
