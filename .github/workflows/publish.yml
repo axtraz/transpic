@@ -79,6 +79,10 @@ jobs:
         working-directory: core
         run: pnpm install --no-frozen-lockfile
 
+      - name: Create bin directory
+        working-directory: core
+        run: mkdir -p bin
+
       - name: Build
         working-directory: core
         run: ${{ matrix.build }}
