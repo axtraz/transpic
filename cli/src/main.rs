@@ -24,6 +24,9 @@ struct Cli {
     #[arg(long, help = "Grayscale the image, example: --grayscale")]
     grayscale: Option<bool>,
 
+    #[arg(long, help = "Hue rotation in degrees, example: --huerotate 90")]
+    huerotate: Option<i32>,
+
     #[arg(long, help = "Invert the image colors, example: --invert")]
     invert: Option<bool>,
 
@@ -61,8 +64,9 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let options = ImageOptions {
-        blur: cli.blur,
+        blur: cli.blur ,
         grayscale: cli.grayscale,
+        huerotate: cli.huerotate,
         invert: cli.invert,
         resize: cli.resize,
         rotate: cli.rotate,
