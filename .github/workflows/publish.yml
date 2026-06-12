@@ -87,7 +87,7 @@ jobs:
             -v ${{ github.workspace }}:/workspace
             -w /workspace/core
           run: |
-            npm install -g pnpm --force
+            npm install -g pnpm@9 --force
             pnpm install --no-frozen-lockfile
             ${{ matrix.build }}
 
