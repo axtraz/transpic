@@ -1,35 +1,46 @@
 ---
 title: Supported Formats
-description: All image formats supported by transpic for reading and writing.
+description: Image formats supported as input and output by transpic-cli.
 ---
 
-`transpic` supports a wide range of image formats. The table below lists each format, its file extensions, and relevant notes.
+import { Callout } from 'fumadocs-ui/components/callout';
 
-## Format Reference
+`transpic-cli` relies on the [`image`](https://crates.io/crates/image) crate for decoding and encoding. The input format is auto-detected from the file's contents, so the file extension doesn't need to match the actual format.
 
-| Format | Extension(s) | Notes |
-|--------|-------------|-------|
-| AVIF | `.avif` | AV1-based modern format with excellent compression and HDR support |
-| BMP | `.bmp` | Uncompressed Windows bitmap; widely compatible but large file sizes |
-| OpenEXR | `.exr` | High dynamic range format used in VFX and compositing pipelines |
-| Farbfeld | `.ff` | Minimal lossless format by suckless; 16-bit RGBA, no metadata |
-| GIF | `.gif` | Lossless 256-color format; supports animation |
-| Radiance HDR | `.hdr` | RGBE high dynamic range format for lighting and environment maps |
-| ICO | `.ico` | Windows icon container; may embed multiple sizes |
-| JPEG | `.jpeg`, `.jpg` | Lossy compressed format; ubiquitous for photos |
-| PNG | `.png` | Lossless compressed format with full alpha channel support |
-| PNM | `.pnm` | Portable anymap family (PBM/PGM/PPM); plain or binary encoding |
-| QOI | `.qoi` | Quite OK Image Format; fast lossless compression, simple spec |
-| TGA | `.tga` | Truevision TGA; lossless with optional RLE; common in game assets |
-| TIFF | `.tiff`, `.tif` | Flexible container supporting lossless and lossy encoding; multi-page capable |
-| WebP | `.webp` | Google's modern format supporting both lossy and lossless modes |
+## Output formats (`--format`)
 
-## Notes
+The following values are accepted for `--format`, along with their aliases:
 
-<Callout type="info">
-  When an extension is ambiguous (e.g. `.pnm` covers PBM, PGM, and PPM), `transpic` detects the actual subtype from the file header.
-</Callout>
+| Format | Value(s) for `--format` |
+| --- | --- |
+| AVIF | `avif` |
+| Bitmap | `bmp` |
+| OpenEXR | `exr` |
+| Farbfeld | `ff`, `farbfeld` |
+| GIF | `gif` |
+| Radiance HDR | `hdr` |
+| Icon | `ico` | |
+| JPEG | `jpeg`, `jpg` |
+| PNG | `png` |
+| PNM | `pnm` |
+| QOI | `qoi` |
+| TGA | `tga` |
+| TIFF | `tiff`, `tif` |
+| WebP | `webp` |
 
 <Callout type="warn">
-  Not all format pairs support lossless round-trips. Converting from a lossy format (e.g. JPEG) to a lossless one (e.g. PNG) preserves the already-degraded data, but does not recover lost quality.
+  Passing any other value to `--format` returns an `Unsupported output format` error. See [Troubleshooting](/docs/troubleshooting) for details.
 </Callout>
+
+## Input formats
+
+Input format detection is automatic — `transpic-cli` reads the file's magic bytes rather than relying on its extension. In practice, this covers the same set of formats listed above (PNG, JPEG, GIF, BMP, ICO, TIFF, WebP, AVIF, PNM, QOI, TGA, Farbfeld, and OpenEXR/HDR), as supported by the underlying `image` crate.
+
+If `--format` is omitted, the output is encoded back to the **same format the input was detected as**.
+
+## Choosing a format
+
+- Use **PNG** for lossless output and when transparency matters.
+- Use **JPEG** or **WebP** for smaller file sizes with photographic content.
+- Use **WebP** or **AVIF** for the best size-to-quality ratio if your target platform supports them.
+- Avoid converting images with transparency to **JPEG**, since the alpha channel will be discarded.

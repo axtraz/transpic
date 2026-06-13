@@ -1,72 +1,179 @@
 ---
 title: Troubleshooting
-description: Common errors and how to fix them.
+description: Common errors you may encounter while installing or using transpic-cli, and how to fix them.
 ---
 
-### `error: required argument '--path' not provided`
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-You forgot the required `--path` flag.
+This page lists the errors `transpic-cli` can return, what causes them, and how to fix them.
+If you run into something that isn't covered here, please open an issue on GitHub.
 
-```bash
-# ❌
-transpic --format webp
+## Installation issues
 
-# ✓
-transpic --path photo.jpg --format webp
+`transpic-cli` is published on npm under the [`@transpic/cli`](https://www.npmjs.com/package/transpic-cli) package, with platform-specific binaries installed automatically as optional dependencies.
+
+```npm
+npm install -g transpic-cli
 ```
 
----
+<Accordions>
+  <Accordion title="command not found: transpic">
+    This means the global npm `bin` directory isn't in your `PATH`.
 
-### `error: unsupported format "svg"`
+    Run `npm config get prefix` and make sure `<prefix>/bin` (or `<prefix>` on Windows) is added to your `PATH`. After updating your `PATH`, restart your terminal.
+  </Accordion>
 
-The requested format is not supported by `transpic`. Check the [Supported Formats](/docs/guide/supported-formats) page for the full list of valid values.
+  <Accordion title="EACCES: permission denied (npm install -g)">
+    This happens when npm's global directory isn't writable by your user. Avoid running the install with `sudo`, as this can cause further permission issues.
 
----
+    Instead, configure npm to use a directory you own, for example:
 
-### `error: invalid value for --rotate`
+    ```bash
+    mkdir ~/.npm-global
+    npm config set prefix '~/.npm-global'
+    ```
 
-`--rotate` only accepts `90`, `180`, or `270`. Any other value is rejected.
+    Then add `~/.npm-global/bin` to your `PATH` and reinstall.
+  </Accordion>
+</Accordions>
 
-```bash
-# ❌
-transpic --path photo.jpg --rotate 45
+## Argument errors
 
-# ✓
-transpic --path photo.jpg --rotate 90
+### "You must specify at least one action"
+
+```text
+Error: You must specify at least one action (e.g., --grayscale, --blur 2, etc.).
 ```
 
----
+`transpic-cli` requires at least one transformation flag (`--blur`, `--brightness`, `--grayscale`, `--huerotate`, `--invert`, `--resize`, `--rotate`, or `--format`). Running the CLI with only `--path` and no transformation does nothing, so it errors out instead.
 
-### `error: could not read file` / `No such file or directory`
-
-The path passed to `--path` doesn't exist or is misspelled. Double-check the path and ensure the file is accessible.
+**Fix:** add at least one option, for example:
 
 ```bash
-ls photo.jpg
-transpic --path photo.jpg --format webp
+transpic --path image.png --grayscale true
 ```
 
----
+<Callout type="info">
+  `--grayscale` and `--invert` take an explicit boolean value (`true`/`false`) rather than acting as standalone flags. Use `--grayscale true` or `--invert true`, not just `--grayscale` on its own.
+</Callout>
 
-### `error: could not decode image`
+### Invalid value for `--rotate`
 
-The file is corrupted, truncated, or the extension doesn't match the actual content (e.g. a PNG renamed to `.jpg`). Verify the file is a valid image:
+The `--rotate` option only accepts `90`, `180`, or `270`. Any other value (including `0`, `45`, or `360`) will return an error from the underlying rotation logic.
+
+**Fix:** use one of the three supported angles. To rotate by an arbitrary angle, consider chaining multiple `--rotate 90` operations or using a dedicated image editor.
+
+### Invalid value for `--resize`
+
+The `--resize` option expects a `WIDTHxHEIGHT` string, for example `--resize 800x600`. If the value doesn't match this pattern (missing `x`, non-numeric width/height, etc.), `transpic-cli` returns a parsing error.
+
+**Fix:** make sure both dimensions are positive integers separated by a lowercase `x`:
 
 ```bash
-file photo.jpg   # should report "JPEG image data"
+transpic --path image.png --resize 1280x720
 ```
 
----
+## Image processing errors
 
-### The output file is larger than the input
+These errors come from `transpic-core` and are forwarded as-is by the CLI.
 
-This is expected in some cases — e.g. converting a JPEG to PNG is lossless and will almost always produce a larger file. Use a format suited for the target use case (WebP or AVIF for web, PNG for lossless editing).
+### Failed to open image
 
----
+```text
+Error: Failed to open image '<path>': <os error>
+```
 
-### Memory issues with very large images
+The file at `--path` could not be opened. Common causes:
 
-Processing large RAW or TIFF files can be memory-intensive. If the process is killed by the OS, try:
+- The path is incorrect or relative to the wrong working directory.
+- The file doesn't exist.
+- You don't have read permission on the file.
 
-- Resizing the image first: `--resize 4096x0`
-- Ensuring you have enough free RAM (a 100 MP image can require several GB when decoded)
+**Fix:** double-check the path (use an absolute path if unsure) and verify the file exists and is readable.
+
+### Failed to guess image format
+
+```text
+Error: Failed to guess image format: <error>
+```
+
+`transpic-cli` couldn't determine the format of the input file from its contents. This usually means the file is corrupted, empty, or not actually an image (e.g. a renamed text file).
+
+**Fix:** verify the file opens correctly in another image viewer, and that its extension matches its real content.
+
+### Failed to decode image
+
+```text
+Error: Failed to decode image: <error>
+```
+
+The format was recognized, but the image data itself couldn't be decoded — typically due to a corrupted or truncated file, or a format variant that isn't fully supported.
+
+**Fix:** try re-exporting the image from its original source, or convert it to a more common format (e.g. PNG) before processing.
+
+### Unsupported output format
+
+```text
+Error: Unsupported output format: <format>
+```
+
+The value passed to `--format` isn't one of the [supported formats](/docs/supported-formats). Check the spelling — note that some formats have aliases (`jpg`/`jpeg`, `tif`/`tiff`, `ff`/`farbfeld`).
+
+### Could not determine the original image format
+
+```text
+Error: Could not determine original image format.
+```
+
+This happens when `--format` is not provided and `transpic-cli` is also unable to detect the input file's format from its contents. Without an output format, it doesn't know which encoder to use.
+
+**Fix:** pass `--format` explicitly with one of the [supported formats](/docs/supported-formats).
+
+### Failed to encode image to requested format
+
+```text
+Error: Failed to encode image to requested format: <error>
+```
+
+The image was decoded and processed successfully, but the encoder for the requested `--format` failed — for example, because the color type or dimensions aren't supported by that format (some formats, like JPEG, don't support transparency).
+
+**Fix:** try a different output format, or remove transformations that introduce an alpha channel (if your target format doesn't support one).
+
+### Could not read the source file name
+
+```text
+Error: Could not read the source file name
+```
+
+This is an internal edge case where the input path has no file name component (e.g. it points to a directory or the filesystem root).
+
+**Fix:** make sure `--path` points to an actual file, not a directory.
+
+### Failed to create file / Failed to write data to file
+
+```text
+Error: Failed to create file '<filename>': <error>
+Error: Failed to write data to file: <error>
+```
+
+`transpic-cli` couldn't write the output file in the current working directory. Common causes:
+
+- No write permission in the current directory.
+- The disk is full.
+- A directory with the same name already exists.
+
+**Fix:** run the command from a directory you have write access to, free up disk space, or remove/rename any conflicting file.
+
+## Effect-specific errors
+
+The `--brightness` and `--huerotate` options can return validation errors from `transpic-core` if the provided value is out of the expected range. If you see an error mentioning brightness or hue rotation, try a smaller value (e.g. between `-100` and `100`) and gradually adjust from there.
+
+## Still stuck?
+
+If your error isn't listed here, run the command again and copy the full red error message — it comes directly from `transpic-core` and usually includes the underlying I/O or codec error, which is helpful for debugging. You can then open an issue on the [GitHub repository](https://github.com) with:
+
+- The exact command you ran
+- The full error output
+- Your OS, architecture, and `transpic-cli` version (`transpic --version`)

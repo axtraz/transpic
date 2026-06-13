@@ -1,75 +1,78 @@
 ---
 title: Examples
-description: Real-world usage examples for transpic.
+description: Practical usage examples for transpic-cli, from single commands to batch processing and CI.
 ---
 
-## Convert a single image to WebP
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
 
-The most common use case — converting a photo for web delivery:
+## Basic transformations
 
-```bash
-transpic --path hero.png --format webp
-# → hero.webp
-```
-
----
-
-## Convert an entire folder to WebP
-
-`transpic` processes one file at a time, so use a shell loop to batch-convert a directory:
+Convert an image to grayscale:
 
 ```bash
-# Bash / Zsh
-for f in images/*.png; do
-  transpic --path "$f" --format webp
-done
+transpic --path photo.png --grayscale true
 ```
 
-```powershell
-# PowerShell
-Get-ChildItem images\*.png | ForEach-Object {
-  transpic --path $_.FullName --format webp
-}
-```
-
----
-
-## Resize and convert in one pass
-
-Resize a photo to a thumbnail and convert to AVIF at the same time:
+Resize an image to 1280x720:
 
 ```bash
-transpic --path photo.jpg --resize 400x300 --format avif
+transpic --path photo.png --resize 1280x720
 ```
 
----
-
-## Create a grayscale copy
+Convert a PNG to WebP:
 
 ```bash
-transpic --path portrait.jpg --grayscale --format png
+transpic --path photo.png --format webp
 ```
 
----
-
-## Rotate a batch of incorrectly oriented images
+Rotate an image by 180 degrees:
 
 ```bash
-for f in scans/*.tiff; do
-  transpic --path "$f" --rotate 90
-done
+transpic --path photo.png --rotate 180
 ```
 
----
+## Combining multiple transformations
 
-## Apply multiple transformations at once
-
-Blur, grayscale, resize, and re-encode in a single command:
+Resize, increase brightness, and export as JPEG in a single command:
 
 ```bash
-transpic --path raw.tiff \
-  --resize 800x600 \
-  --blur 1.5 \
-  --grayscale \
-  --format png
+transpic --path photo.png --resize 800x600 --brightness 15 --format jpeg
 ```
+
+Blur, invert colors, and rotate the hue:
+
+```bash
+transpic --path photo.png --blur 3 --invert true --huerotate 45
+```
+
+## Batch processing
+
+To process every image in a directory, loop over the files and call `transpic` once per file.
+
+<Tabs items={['Bash', 'PowerShell']}>
+  <Tab value="Bash">
+    ```bash
+    for file in ./images/*.png; do
+      transpic --path "$file" --resize 1024x1024 --format webp
+    done
+    ```
+  </Tab>
+  <Tab value="PowerShell">
+    ```powershell
+    Get-ChildItem .\images\*.png | ForEach-Object {
+      transpic --path $_.FullName --resize 1024x1024 --format webp
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  Output files are written to the current working directory using the input file's name (with a new extension if `--format` changes it). Run the loop from a dedicated output folder if you don't want to overwrite your originals.
+</Callout>
+
+## Next steps
+
+- See [Options](/docs/options) for the full list of flags.
+- See [Supported Formats](/docs/supported-formats) for accepted `--format` values.
+- See [Troubleshooting](/docs/troubleshooting) if a command returns an error.

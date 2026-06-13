@@ -1,100 +1,104 @@
 ---
 title: Options
-description: All available CLI flags and options for transpic.
+description: Full reference of every command-line option supported by transpic-cli.
 ---
 
-## Synopsis
+import { Callout } from "fumadocs-ui/components/callout";
+
+`transpic-cli` is a single-command CLI: every option below can be combined freely, and all transformations are applied in a fixed order regardless of the order you pass them on the command line.
+
+## Usage
 
 ```bash
-transpic --path <file> [OPTIONS]
+transpic --path <PATH> [OPTIONS]
 ```
 
-`--path` is the only required flag. All other options are optional and can be combined freely.
-
-## Flags
-
-### `--path <file>` _(required)_
-
-Path to the input image.
-
-```bash
-transpic --path photo.jpg
-```
-
----
-
-### `--format <format>`
-
-Convert the image to the specified output format. The output file is written alongside the input with the new extension.
-
-```bash
-transpic --path photo.jpg --format webp
-# → photo.webp
-```
-
-See [Supported Formats](/docs/supported-formats) for the full list of valid values.
-
----
-
-### `--resize <WxH>`
-
-Resize the image to the given dimensions. Both width and height are required and separated by `x`.
-
-```bash
-transpic --path photo.jpg --resize 1280x720
-```
-
-<Callout type="info">
-  Aspect ratio is **not** preserved automatically. If you want to constrain only one dimension, use `0` as a placeholder — e.g. `--resize 1280x0` to fix the width and derive the height proportionally.
+<Callout type="warn">
+    At least one transformation option (`--format`, `--blur`, `--brightness`, `--grayscale`, `--huerotate`, `--invert`,
+    `--resize`, or `--rotate`) is required. Running `transpic --path image.png` alone returns an error.
 </Callout>
 
----
+## Reference
 
-### `--rotate <degrees>`
+| Option                      | Type    | Required | Description                                                                                  |
+| --------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------- |
+| `-p, --path <PATH>`         | path    | Yes      | Path to the input image.                                                                     |
+| `--format <FORMAT>`         | string  | No       | Output format (e.g. `png`, `jpeg`, `webp`). Defaults to the input image's format if omitted. |
+| `--blur <SIGMA>`            | float   | No       | Gaussian blur intensity (standard deviation).                                                |
+| `--brightness <VALUE>`      | integer | No       | Brightness adjustment. Positive values brighten, negative values darken.                     |
+| `--grayscale` | boolean | No       | Converts the image to grayscale.                                                             |
+| `--huerotate <DEGREES>`     | integer | No       | Rotates the image's hue by the given number of degrees.                                      |
+| `--invert`    | boolean | No       | Inverts the image's colors.                                                                  |
+| `--resize <WIDTHxHEIGHT>`   | string  | No       | Resizes the image to the given dimensions, e.g. `800x600`.                                   |
+| `--rotate <ANGLE>`          | integer | No       | Rotates the image. Only `90`, `180`, and `270` are accepted.                                 |
+| `-V, --version`             | flag    | No       | Prints the CLI version.                                                                      |
+| `-h, --help`                | flag    | No       | Prints help information.                                                                     |
 
-Rotate the image clockwise. Accepted values: `90`, `180`, `270`.
+## Notes on individual options
 
-```bash
-transpic --path photo.jpg --rotate 90
-```
+### `--path`
 
----
+Accepts relative or absolute paths. The output file is written to the **current working directory**, using the same file stem as the input (e.g. `photo.png` → `photo.png` or `photo.<new-ext>` if `--format` changes the extension).
 
-### `--blur <intensity>`
+### `--format`
 
-Apply a Gaussian blur. The value is a floating-point intensity.
+See [Supported Formats](/docs/supported-formats) for the full list of accepted values and their aliases (e.g. `jpg`/`jpeg`, `tif`/`tiff`).
 
-```bash
-transpic --path photo.jpg --blur 2.5
-```
+If omitted, `transpic-cli` re-encodes the image using its original detected format.
 
----
+### `--blur`
 
-### `--grayscale`
-
-Convert the image to grayscale.
-
-```bash
-transpic --path photo.jpg --grayscale
-```
-
----
-
-### `--invert`
-
-Invert all pixel colors.
+Takes a floating point sigma value. Larger values produce a stronger blur:
 
 ```bash
-transpic --path photo.jpg --invert
+transpic --path photo.png --blur 2.5
 ```
 
----
+### `--brightness`
 
-Options are applied in the following order regardless of how they are passed on the command line:
+Accepts positive or negative integers:
 
-1. Resize
-2. Rotate
-3. Blur
-4. Grayscale
-5. Invert
-6. Format conversion
+```bash
+transpic --path photo.png --brightness -20
+```
+
+### `--grayscale` and `--invert`
+
+These take an explicit boolean value rather than acting as standalone flags:
+
+```bash
+transpic --path photo.png --grayscale
+transpic --path photo.png --invert
+```
+
+### `--huerotate`
+
+Degrees can be any integer; values outside `0–360` wrap around:
+
+```bash
+transpic --path photo.png --huerotate 90
+```
+
+### `--resize`
+
+Must follow the `WIDTHxHEIGHT` format with positive integers and a lowercase `x` separator:
+
+```bash
+transpic --path photo.png --resize 1280x720
+```
+
+### `--rotate`
+
+Only `90`, `180`, and `270` degrees are supported (any other value returns an error):
+
+```bash
+transpic --path photo.png --rotate 180
+```
+
+## Combining options
+
+All options can be combined in a single command. For example, to resize, convert to grayscale, and export as WebP in one pass:
+
+```bash
+transpic --path photo.png --resize 1024x768 --grayscale true --format webp
+```
