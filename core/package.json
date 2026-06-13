@@ -1,18 +1,17 @@
 {
     "name": "transpic-core",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
     "keywords": [
+        "blur",
+        "grayscale",
         "image",
         "image-processing",
-        "rust",
         "napi",
         "napi-rs",
         "native",
-        "blur",
         "resize",
-        "grayscale"
-
+        "rust"
     ],
     "license": "MIT",
     "repository": {
@@ -61,11 +60,11 @@
         "typescript": "^6.0.0"
     },
     "optionalDependencies": {
-        "transpic-core-darwin-arm64": "0.2.2",
-        "transpic-core-linux-x64-gnu": "0.2.2",
-        "transpic-core-linux-x64-musl": "0.2.2",
-        "transpic-core-win32-arm64-msvc": "0.2.2",
-        "transpic-core-win32-x64-msvc": "0.2.2"
+        "transpic-core-darwin-arm64": "0.2.3",
+        "transpic-core-linux-x64-gnu": "0.2.3",
+        "transpic-core-linux-x64-musl": "0.2.3",
+        "transpic-core-win32-arm64-msvc": "0.2.3",
+        "transpic-core-win32-x64-msvc": "0.2.3"
     },
     "lint-staged": {
         "*.@(js|ts|tsx)": [
