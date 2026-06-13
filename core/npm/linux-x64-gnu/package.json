@@ -10,15 +10,15 @@
   ],
   "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
   "keywords": [
+    "blur",
+    "grayscale",
     "image",
     "image-processing",
-    "rust",
     "napi",
     "napi-rs",
     "native",
-    "blur",
     "resize",
-    "grayscale"
+    "rust"
   ],
   "license": "MIT",
   "engines": {
