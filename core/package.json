@@ -1,14 +1,18 @@
 {
     "name": "transpic-core",
     "version": "0.2.2",
-    "description": "Template project for writing node package with napi-rs",
+    "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
     "keywords": [
-        "N-API",
-        "NAPI",
-        "Rust",
+        "image",
+        "image-processing",
+        "rust",
+        "napi",
         "napi-rs",
-        "node-addon",
-        "node-addon-api"
+        "native",
+        "blur",
+        "resize",
+        "grayscale"
+
     ],
     "license": "MIT",
     "repository": {
