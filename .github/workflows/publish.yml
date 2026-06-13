@@ -175,7 +175,7 @@ jobs:
         run: |
           for dir in npm/*/; do
             echo "Publishing $dir"
-            npm publish "$dir" --access public
+            (cd "$dir" && npm publish --access public)
           done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
