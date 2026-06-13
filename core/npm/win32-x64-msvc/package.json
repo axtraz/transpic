@@ -4,9 +4,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "bin/transpic-core.win32-x64-msvc.node",
+  "main": "transpic-core.win32-x64-msvc.node",
   "files": [
-    "bin/transpic-core.win32-x64-msvc.node"
+    "transpic-core.win32-x64-msvc.node"
   ],
   "description": "Template project for writing node package with napi-rs",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/axtraz/transpic.git"
+    "url": "git+https://github.com/axtraz/transpic.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

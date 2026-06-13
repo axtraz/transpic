@@ -13,7 +13,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/axtraz/transpic.git"
+        "url": "git+https://github.com/axtraz/transpic.git"
     },
     "files": [
         "index.d.ts",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "artifacts": "napi artifacts",
-        "build": "napi build --platform --release",
+        "build": "napi build --platform --release --output-dir bin",
         "build:debug": "napi build --platform",
         "format": "run-p format:oxfmt format:rs format:toml",
         "format:oxfmt": "oxfmt .",
@@ -75,7 +75,7 @@
         ]
     },
     "napi": {
-        "binaryName": "bin/transpic-core",
+        "binaryName": "transpic-core",
         "targets": [
             "x86_64-pc-windows-msvc",
             "x86_64-unknown-linux-gnu",

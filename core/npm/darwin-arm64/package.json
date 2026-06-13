@@ -4,9 +4,9 @@
   "cpu": [
     "arm64"
   ],
-  "main": "bin/transpic-core.darwin-arm64.node",
+  "main": "transpic-core.darwin-arm64.node",
   "files": [
-    "bin/transpic-core.darwin-arm64.node"
+    "transpic-core.darwin-arm64.node"
   ],
   "description": "Template project for writing node package with napi-rs",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/axtraz/transpic.git"
+    "url": "git+https://github.com/axtraz/transpic.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
