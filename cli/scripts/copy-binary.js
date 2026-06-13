@@ -4,10 +4,13 @@ const path = require('path');
 const binDir = path.join(__dirname, '..', 'bin');
 const targetReleaseDir = path.join(__dirname, '..', 'target', 'release');
 
-const binaryName = process.platform === 'win32' ? 'transpic-cli.exe' : 'transpic-cli';
+const sourceName = process.platform === 'win32' ? 'transpic-cli.exe' : 'transpic-cli';
+const destName = process.platform === 'win32'
+    ? 'transpic-cli.exe'
+    : `transpic-cli-${process.platform}`;
 
-const source = path.join(targetReleaseDir, binaryName);
-const destination = path.join(binDir, binaryName);
+const source = path.join(targetReleaseDir, sourceName);
+const destination = path.join(binDir, destName);
 
 if (!fs.existsSync(binDir)) {
     fs.mkdirSync(binDir, { recursive: true });
