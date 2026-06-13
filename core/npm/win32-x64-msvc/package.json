@@ -8,14 +8,17 @@
   "files": [
     "transpic-core.win32-x64-msvc.node"
   ],
-  "description": "Template project for writing node package with napi-rs",
+  "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
   "keywords": [
-    "N-API",
-    "NAPI",
-    "Rust",
+    "image",
+    "image-processing",
+    "rust",
+    "napi",
     "napi-rs",
-    "node-addon",
-    "node-addon-api"
+    "native",
+    "blur",
+    "resize",
+    "grayscale"
   ],
   "license": "MIT",
   "engines": {
