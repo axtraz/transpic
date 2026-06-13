@@ -1,6 +1,7 @@
 {
   "name": "transpic-core-win32-x64-msvc",
   "version": "0.2.3",
+  "version": "0.3.0",
   "cpu": [
     "x64"
   ],
@@ -35,4 +36,5 @@
   "os": [
     "win32"
   ]
+}
 }

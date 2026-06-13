@@ -1,6 +1,7 @@
 {
   "name": "transpic-core-linux-x64-musl",
   "version": "0.2.3",
+  "version": "0.3.0",
   "cpu": [
     "x64"
   ],
@@ -38,4 +39,5 @@
   "libc": [
     "musl"
   ]
+}
 }
