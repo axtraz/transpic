@@ -1,5 +1,5 @@
 {
-  "name": "transpic-cli",
+  "name": "@axtraz/transpic-cli",
   "version": "0.3.1",
   "description": "A fast image manipulation CLI tool",
   "main": "src/cli.js",
