@@ -87,7 +87,7 @@ jobs:
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            binary: transpic-cli
+            binary: transpic-cli-linux
 
           - os: windows-latest
             target: x86_64-pc-windows-msvc
@@ -118,7 +118,11 @@ jobs:
         shell: bash
         run: |
           mkdir -p target/release
-          cp target/${{ matrix.target }}/release/${{ matrix.binary }} target/release/
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            cp target/${{ matrix.target }}/release/transpic-cli.exe target/release/
+          else
+            cp target/${{ matrix.target }}/release/transpic-cli target/release/
+          fi
 
       - name: Copy binary
         working-directory: cli
@@ -194,7 +198,7 @@ jobs:
           merge-multiple: true
 
       - name: Set permissions
-        run: chmod +x cli/bin/transpic-cli || true
+        run: chmod +x cli/bin/transpic-cli-linux || true
 
       - name: Publish CLI
         working-directory: cli
