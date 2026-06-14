@@ -7,6 +7,7 @@ use napi::{Error as NapiError, Status};
 use napi_derive::napi;
 
 pub mod blur;
+pub mod brighten;
 pub mod grayscale;
 pub mod huerotate;
 pub mod invert;
@@ -16,6 +17,7 @@ pub mod rotate;
 #[napi(object)]
 pub struct ImageOptions {
   pub blur: Option<f64>,
+  pub brighten: Option<i32>,
   pub grayscale: Option<bool>,
   pub huerotate: Option<i32>,
   pub invert: Option<bool>,
@@ -53,6 +55,11 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
 
   if let Some(sigma) = options.blur {
     img = blur::blur(img, sigma as f32);
+  }
+
+  if let Some(intensity) = options.brighten {
+    img = brighten::brighten(img, intensity)
+      .map_err(|e| NapiError::new(Status::GenericFailure, e.to_string()))?;
   }
 
   if options.grayscale.unwrap_or(false) {
