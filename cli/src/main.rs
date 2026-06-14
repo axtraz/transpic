@@ -21,6 +21,12 @@ struct Cli {
     #[arg(long, help = "Blur intensity, example: --blur 1")]
     blur: Option<f32>,
 
+    #[arg(
+        long,
+        help = "Brighten the image by an integer (positive to increase, negative to decrease). Example: --brighten 20"
+    )]
+    brighten: Option<i32>,
+
     #[arg(long, help = "Grayscale the image, example: --grayscale")]
     grayscale: Option<bool>,
 
@@ -53,7 +59,9 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
 
     if cli.format.is_none()
         && cli.blur.is_none()
+        && cli.brighten.is_none()
         && !cli.grayscale.unwrap_or(false)
+        && cli.huerotate.is_none()
         && !cli.invert.unwrap_or(false)
         && cli.resize.is_none()
         && cli.rotate.is_none()
@@ -65,6 +73,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
 
     let options = ImageOptions {
         blur: cli.blur.map(|b| b as f64),
+        brighten: cli.brighten,
         grayscale: cli.grayscale,
         huerotate: cli.huerotate,
         invert: cli.invert,
