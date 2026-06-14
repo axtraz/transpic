@@ -5,7 +5,7 @@ A fast image manipulation CLI tool.
 ## Installation
 
 ```bash
-npm install -g transpic-cli
+npm install -g @axtraz/transpic-cli
 ```
 
 ## Usage
