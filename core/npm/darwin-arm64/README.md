@@ -1,3 +1,3 @@
-# `transpic-core-darwin-arm64`
+# `@axtraz/transpic-core-darwin-arm64`
 
-This is the **aarch64-apple-darwin** binary for `transpic-core`
+This is the **aarch64-apple-darwin** binary for `@axtraz/transpic-core`

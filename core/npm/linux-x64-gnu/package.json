@@ -1,6 +1,5 @@
 {
-  "name": "transpic-core-linux-x64-gnu",
-  "version": "0.2.3",
+  "name": "@axtraz/transpic-core-linux-x64-gnu",
   "version": "0.3.0",
   "cpu": [
     "x64"
@@ -21,16 +20,10 @@
     "resize",
     "rust"
   ],
-  "license": "MIT",
   "engines": {
     "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/axtraz/transpic.git"
-  },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "os": [
@@ -39,5 +32,4 @@
   "libc": [
     "glibc"
   ]
-}
 }

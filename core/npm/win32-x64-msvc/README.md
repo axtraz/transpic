@@ -1,3 +1,3 @@
-# `transpic-core-win32-x64-msvc`
+# `@axtraz/transpic-core-win32-x64-msvc`
 
-This is the **x86_64-pc-windows-msvc** binary for `transpic-core`
+This is the **x86_64-pc-windows-msvc** binary for `@axtraz/transpic-core`

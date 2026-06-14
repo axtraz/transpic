@@ -1,3 +1,3 @@
-# `transpic-core-linux-x64-musl`
+# `@axtraz/transpic-core-linux-x64-musl`
 
-This is the **x86_64-unknown-linux-musl** binary for `transpic-core`
+This is the **x86_64-unknown-linux-musl** binary for `@axtraz/transpic-core`

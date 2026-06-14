@@ -1,3 +1,3 @@
-# `transpic-core-linux-x64-gnu`
+# `@axtraz/transpic-core-linux-x64-gnu`
 
-This is the **x86_64-unknown-linux-gnu** binary for `transpic-core`
+This is the **x86_64-unknown-linux-gnu** binary for `@axtraz/transpic-core`
