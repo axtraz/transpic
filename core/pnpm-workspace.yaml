@@ -2,3 +2,5 @@ packages:
     - "core"
     - "cli"
     - "docs"
+minimumReleaseAgeExclude:
+    - "@napi-rs/cli@3.7.2"
