@@ -39,21 +39,21 @@ The function writes the output file to the current working directory and returns
 
 ### `ImageOptions`
 
-| Option          | Type      | Description                                   |
-| --------------- | --------- | --------------------------------------------- |
-| `blur`          | `number`  | Gaussian blur sigma                           |
-| `grayscale`     | `boolean` | Convert to grayscale                          |
-| `huerotate`     | `number`  | Rotate hue by degrees                         |
-| `invert`        | `boolean` | Invert colors                                 |
-| `resize`        | `string`  | Target dimensions, e.g. `"800x600"`           |
-| `rotate`        | `number`  | Rotation in degrees (e.g. `90`, `180`, `270`) |
-| `output_format` | `string`  | Output format (see supported formats below)   |
+| Option         | Type      | Description                                   |
+| -------------- | --------- | --------------------------------------------- |
+| `blur`         | `number`  | Gaussian blur sigma                           |
+| `grayscale`    | `boolean` | Convert to grayscale                          |
+| `huerotate`    | `number`  | Rotate hue by degrees                         |
+| `invert`       | `boolean` | Invert colors                                 |
+| `resize`       | `string`  | Target dimensions, e.g. `"800x600"`           |
+| `rotate`       | `number`  | Rotation in degrees (e.g. `90`, `180`, `270`) |
+| `outputFormat` | `string`  | Output format (see supported formats below)   |
 
 ### Supported formats
 
 `avif`, `bmp`, `exr`, `farbfeld` (`ff`), `gif`, `hdr`, `ico`, `jpeg` (`jpg`), `png`, `pnm`, `qoi`, `tga`, `tiff` (`tif`), `webp`
 
-If `output_format` is omitted, the original format is preserved.
+If `outputFormat` is omitted, the original format is preserved.
 
 ## Supported platforms
 
