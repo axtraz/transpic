@@ -1,6 +1,6 @@
 {
     "name": "@axtraz/transpic-core",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
     "keywords": [
         "blur",
@@ -13,12 +13,17 @@
         "resize",
         "rust"
     ],
+    "license": "MIT",
+    "files": [
+        "index.js",
+        "index.d.ts"
+    ],
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
         "artifacts": "napi artifacts",
-        "build": "napi build --platform --release --output-dir bin",
+        "build": "napi build --platform --release",
         "build:debug": "napi build --platform",
         "format": "run-p format:oxfmt format:rs format:toml",
         "format:oxfmt": "oxfmt .",
