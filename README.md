@@ -7,13 +7,13 @@
 ### CLI
 
 ```bash
-pnpm install transpic-cli
+npm install -g @axtraz/transpic-cli
 ```
 
 ### Node.js (core)
 
 ```bash
-pnpm install transpic-core
+npm install transpic-core
 ```
 
 ---
