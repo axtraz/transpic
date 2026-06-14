@@ -9,6 +9,9 @@
   "scripts": {
     "build": "cargo build --release && node scripts/copy-binary.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "cli",
     "image",
