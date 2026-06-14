@@ -5,13 +5,13 @@ Native Node.js bindings for fast image manipulation, powered by Rust and [napi-r
 ## Installation
 
 ```bash
-npm install transpic-core
+npm install @axtraz/transpic-core
 ```
 
 ## Usage
 
 ```javascript
-const { processImage } = require("transpic-core");
+const { processImage } = require("@axtraz/transpic-core");
 
 processImage("input.jpg", {
     blur: 5,
