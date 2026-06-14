@@ -22,5 +22,5 @@ export default defineConfig({
         "no-shadow": "off",
         "unicorn/no-empty-file": "off",
     },
-    ignorePatterns: ["target", "node_modules", "index.js", ".pnpm-lock.yaml"],
+    ignorePatterns: ["target", "node_modules", "index.js", "pnpm-lock.yaml"],
 });

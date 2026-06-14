@@ -9,5 +9,5 @@ export default defineConfig({
     sortImports: {
         newlinesBetween: false,
     },
-    ignorePatterns: ["target", "node_modules", "index.js", ".pnpm-lock.yaml"],
+    ignorePatterns: ["target", "node_modules", "index.js", "pnpm-lock.yaml"],
 });
