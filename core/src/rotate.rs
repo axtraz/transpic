@@ -1,5 +1,12 @@
 use image::DynamicImage;
 
+/// Rotates the image by `angle` degrees clockwise.
+///
+/// Only axis-aligned rotations are supported: `0`, `90`, `180`, `270`.
+/// `0` is a no-op that returns the image unchanged.
+///
+/// # Errors
+/// Returns `Err` if `angle` isn't one of `0`, `90`, `180`, `270`.
 pub fn rotate(img: DynamicImage, angle: u32) -> Result<DynamicImage, String> {
   match angle {
     90 => Ok(img.rotate90()),

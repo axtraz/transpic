@@ -27,18 +27,44 @@ pub fn clamp_for_format(img: DynamicImage, fmt: ImageFormat) -> DynamicImage {
     }
 }
 
+/// Options for a single `processImage` call. All fields are optional —
+/// omitted operations are skipped entirely rather than applied with a
+/// default/no-op value. Operations are applied in a fixed order
+/// (blur, brighten, grayscale, huerotate, invert, resize, rotate),
+/// regardless of the order fields are set in JS.
 #[napi(object)]
 pub struct ImageOptions {
+  /// Gaussian blur sigma. Larger values blur more; cost scales with sigma.
   pub blur: Option<f64>,
+  /// Brightness delta applied per-pixel. Positive brightens, negative darkens.
   pub brighten: Option<i32>,
+  /// If `true`, converts the image to grayscale.
   pub grayscale: Option<bool>,
+  /// Hue rotation in degrees (0-360, can wrap).
   pub huerotate: Option<i32>,
+  /// If `true`, inverts all pixel colors.
   pub invert: Option<bool>,
+  /// Target size as a `"WIDTHxHEIGHT"` string, e.g. `"512x512"`.
   pub resize: Option<String>,
+  /// Rotation in degrees. Implementations typically only support
+  /// multiples of 90.
   pub rotate: Option<u32>,
+  /// Output format identifier (e.g. `"png"`, `"ico"`, `"webp"`). Falls back
+  /// to the source image's detected format if omitted.
   pub output_format: Option<String>,
 }
 
+/// Loads an image from `input_path`, applies the requested operations from
+/// `options` in sequence, encodes the result in the requested (or original)
+/// format, and writes it to a sibling file named `<original_stem>.<ext>` in
+/// the current working directory.
+///
+/// Returns the filename that was written on success.
+///
+/// # Errors
+/// Returns a `NapiError` if the file can't be opened/decoded, an operation
+/// fails (e.g. invalid resize string), the output format is unsupported, or
+/// the encoded result can't be written to disk.
 #[napi(js_name = "processImage")]
 pub fn process_image(input_path: String, options: ImageOptions) -> Result<String, NapiError> {
   let input_path = PathBuf::from(input_path);
