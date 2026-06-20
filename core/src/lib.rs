@@ -1,4 +1,4 @@
-use image::{ImageFormat, ImageReader};
+use image::{DynamicImage, ImageFormat, ImageReader};
 use std::fs::File;
 use std::io::{Cursor, Write};
 use std::path::PathBuf;
@@ -13,6 +13,19 @@ pub mod huerotate;
 pub mod invert;
 pub mod resize;
 pub mod rotate;
+
+/// Some output formats impose hard dimension caps (e.g. .ico is limited to
+/// 256x256 per frame). This downscales (never upscales) the image to fit
+/// within the format's limit, preserving aspect ratio. No-op if the image
+/// already fits or the format has no cap.
+pub fn clamp_for_format(img: DynamicImage, fmt: ImageFormat) -> DynamicImage {
+    match fmt {
+        ImageFormat::Ico if img.width() > 256 || img.height() > 256 => {
+            img.resize(256, 256, image::imageops::FilterType::Lanczos3)
+        }
+        _ => img,
+    }
+}
 
 #[napi(object)]
 pub struct ImageOptions {
@@ -116,6 +129,8 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
       )
     })?
   };
+
+  img = clamp_for_format(img, out_fmt);
 
   let mut bytes: Vec<u8> = Vec::new();
   img
