@@ -1,36 +1,36 @@
 {
-    "name": "@axtraz/transpic-core-linux-x64-musl",
-    "version": "0.3.2",
-    "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
-    "keywords": [
-        "blur",
-        "grayscale",
-        "image",
-        "image-processing",
-        "napi",
-        "napi-rs",
-        "native",
-        "resize",
-        "rust"
-    ],
-    "license": "MIT",
-    "files": [
-        "transpic-core.linux-x64-musl.node"
-    ],
-    "os": [
-        "linux"
-    ],
-    "cpu": [
-        "x64"
-    ],
-    "libc": [
-        "musl"
-    ],
-    "main": "transpic-core.linux-x64-musl.node",
-    "publishConfig": {
-        "access": "public"
-    },
-    "engines": {
-        "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
-    }
+  "name": "@axtraz/transpic-core-linux-x64-musl",
+  "version": "0.3.3",
+  "cpu": [
+    "x64"
+  ],
+  "main": "transpic-core.linux-x64-musl.node",
+  "files": [
+    "transpic-core.linux-x64-musl.node"
+  ],
+  "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
+  "keywords": [
+    "blur",
+    "grayscale",
+    "image",
+    "image-processing",
+    "napi",
+    "napi-rs",
+    "native",
+    "resize",
+    "rust"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "os": [
+    "linux"
+  ],
+  "libc": [
+    "musl"
+  ]
 }

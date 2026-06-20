@@ -1,33 +1,33 @@
 {
-    "name": "@axtraz/transpic-core-darwin-arm64",
-    "version": "0.3.2",
-    "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
-    "keywords": [
-        "blur",
-        "grayscale",
-        "image",
-        "image-processing",
-        "napi",
-        "napi-rs",
-        "native",
-        "resize",
-        "rust"
-    ],
-    "license": "MIT",
-    "files": [
-        "transpic-core.darwin-arm64.node"
-    ],
-    "os": [
-        "darwin"
-    ],
-    "cpu": [
-        "arm64"
-    ],
-    "main": "transpic-core.darwin-arm64.node",
-    "publishConfig": {
-        "access": "public"
-    },
-    "engines": {
-        "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
-    }
+  "name": "@axtraz/transpic-core-darwin-arm64",
+  "version": "0.3.3",
+  "cpu": [
+    "arm64"
+  ],
+  "main": "transpic-core.darwin-arm64.node",
+  "files": [
+    "transpic-core.darwin-arm64.node"
+  ],
+  "description": "Native Node.js bindings for fast image manipulation, powered by Rust",
+  "keywords": [
+    "blur",
+    "grayscale",
+    "image",
+    "image-processing",
+    "napi",
+    "napi-rs",
+    "native",
+    "resize",
+    "rust"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 18.17.0 < 19 || >= 20.3.0 < 21 || >= 21.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "os": [
+    "darwin"
+  ]
 }
