@@ -13,7 +13,7 @@ npm install -g @axtraz/transpic-cli
 ### Node.js (core)
 
 ```bash
-npm install transpic-core
+npm install @axtraz/transpic-core
 ```
 
 ---
@@ -45,11 +45,11 @@ transpic --path <image> [options]
 | `--grayscale` | Convert to grayscale | `--grayscale` |
 | `--invert` | Invert colors | `--invert` |
 | `--resize <WxH>` | Resize dimensions | `--resize 1280x720` |
-| `--rotate <deg>` | Rotation angle (90, 180, 270) | `--rotate 90` |
+| `--rotate <deg>` | Rotati‡on angle (90, 180, 270) | `--rotate 90` |
 
 At least one action flag is required.
 
-```bash
+```bas‡h
 # Convert to WebP
 transpic --path photo.jpg --format webp
 
