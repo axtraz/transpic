@@ -53,6 +53,9 @@ core/.vscode-test
 core/__test__/
 core/benchmark/
 
+# --- Directory: src-tauri (Tauri / mobile codegen) ---
+src-tauri/gen/
+
 # ==========================================
 # GLOBAL TOPTAL TEMPLATE & GENERAL RULES
 # ==========================================
@@ -78,6 +81,10 @@ coverage/
 .env
 .env.test
 .env*.local
+
+# Tauri updater signing keys
+*.key
+*.pem
 
 # Global
 **/Cargo.lock
