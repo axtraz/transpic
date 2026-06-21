@@ -1,13 +1,12 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "v[0-9]*"
-      - "*-v[0-9]*"
+  release:
+    types: [published]
 
 jobs:
   build:
+    if: startsWith(github.event.release.tag_name, 'core-v')
     strategy:
       fail-fast: false
       matrix:
@@ -81,6 +80,7 @@ jobs:
           if-no-files-found: error
 
   build-cli:
+    if: startsWith(github.event.release.tag_name, 'cli-v')
     strategy:
       fail-fast: false
       matrix:
@@ -140,6 +140,7 @@ jobs:
           if-no-files-found: error
 
   publish-apps:
+    if: "!startsWith(github.event.release.tag_name, 'core-v') && !startsWith(github.event.release.tag_name, 'cli-v')"
     name: Build & release Tauri app (${{ matrix.platform }})
     permissions:
       contents: write
