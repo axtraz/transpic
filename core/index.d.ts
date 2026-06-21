@@ -4,7 +4,7 @@
  * Options for a single `processImage` call. All fields are optional —
  * omitted operations are skipped entirely rather than applied with a
  * default/no-op value. Operations are applied in a fixed order
- * (blur, brighten, grayscale, huerotate, invert, resize, rotate),
+ * (blur, brighten, grayscale, huerotate, invert, pixelate, resize, rotate),
  * regardless of the order fields are set in JS.
  */
 export interface ImageOptions {
@@ -18,6 +18,11 @@ export interface ImageOptions {
   huerotate?: number
   /** If `true`, inverts all pixel colors. */
   invert?: boolean
+  /**
+   * Pixelation block size in pixels. Larger values produce a chunkier,
+   * more pixelated result. Values `<= 1` have no visible effect.
+   */
+  pixelate?: number
   /** Target size as a `"WIDTHxHEIGHT"` string, e.g. `"512x512"`. */
   resize?: string
   /**

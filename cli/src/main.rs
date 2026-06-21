@@ -36,6 +36,12 @@ struct Cli {
     #[arg(long, help = "Invert the image colors, example: --invert")]
     invert: Option<bool>,
 
+    #[arg(
+        long,
+        help = "Pixelation block size in pixels, example: --pixelate 10"
+    )]
+    pixelate: Option<u32>,
+
     #[arg(long, help = "Resize the image, example: --resize 800x600")]
     resize: Option<String>,
 
@@ -63,6 +69,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         && !cli.grayscale.unwrap_or(false)
         && cli.huerotate.is_none()
         && !cli.invert.unwrap_or(false)
+        && cli.pixelate.is_none()
         && cli.resize.is_none()
         && cli.rotate.is_none()
     {
@@ -77,6 +84,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         grayscale: cli.grayscale,
         huerotate: cli.huerotate,
         invert: cli.invert,
+        pixelate: cli.pixelate,
         resize: cli.resize,
         rotate: cli.rotate,
         output_format: cli.format,

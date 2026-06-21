@@ -11,6 +11,7 @@ pub mod brighten;
 pub mod grayscale;
 pub mod huerotate;
 pub mod invert;
+pub mod pixelate;
 pub mod resize;
 pub mod rotate;
 
@@ -19,18 +20,18 @@ pub mod rotate;
 /// within the format's limit, preserving aspect ratio. No-op if the image
 /// already fits or the format has no cap.
 pub fn clamp_for_format(img: DynamicImage, fmt: ImageFormat) -> DynamicImage {
-    match fmt {
-        ImageFormat::Ico if img.width() > 256 || img.height() > 256 => {
-            img.resize(256, 256, image::imageops::FilterType::Lanczos3)
-        }
-        _ => img,
+  match fmt {
+    ImageFormat::Ico if img.width() > 256 || img.height() > 256 => {
+      img.resize(256, 256, image::imageops::FilterType::Lanczos3)
     }
+    _ => img,
+  }
 }
 
 /// Options for a single `processImage` call. All fields are optional —
 /// omitted operations are skipped entirely rather than applied with a
 /// default/no-op value. Operations are applied in a fixed order
-/// (blur, brighten, grayscale, huerotate, invert, resize, rotate),
+/// (blur, brighten, grayscale, huerotate, invert, pixelate, resize, rotate),
 /// regardless of the order fields are set in JS.
 #[napi(object)]
 pub struct ImageOptions {
@@ -44,6 +45,9 @@ pub struct ImageOptions {
   pub huerotate: Option<i32>,
   /// If `true`, inverts all pixel colors.
   pub invert: Option<bool>,
+  /// Pixelation block size in pixels. Larger values produce a chunkier,
+  /// more pixelated result. Values `<= 1` have no visible effect.
+  pub pixelate: Option<u32>,
   /// Target size as a `"WIDTHxHEIGHT"` string, e.g. `"512x512"`.
   pub resize: Option<String>,
   /// Rotation in degrees. Implementations typically only support
@@ -112,6 +116,11 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
 
   if options.invert.unwrap_or(false) {
     img = invert::invert(img);
+  }
+
+  if let Some(block_size) = options.pixelate {
+    img =
+      pixelate::pixelate(img, block_size).map_err(|e| NapiError::new(Status::GenericFailure, e))?;
   }
 
   if let Some(ref resize_str) = options.resize {
