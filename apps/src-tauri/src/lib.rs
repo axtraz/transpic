@@ -4,7 +4,9 @@ use serde::Deserialize;
 use std::collections::HashMap;
 use std::io::Cursor;
 
-use transpic_core::{blur, brighten, clamp_for_format, grayscale, huerotate, invert, resize, rotate};
+use transpic_core::{
+    blur, brighten, clamp_for_format, grayscale, huerotate, invert, pixelate, resize, rotate,
+};
 
 #[derive(Deserialize)]
 struct PipelineOp {
@@ -89,6 +91,10 @@ fn process_image(
                 } else {
                     img
                 }
+            }
+            "pixelate" => {
+                let block_size = *op.params.get("blockSize").unwrap_or(&8.0) as u32;
+                pixelate::pixelate(img, block_size)?
             }
             "resize" => {
                 let width = *op.params.get("width").unwrap_or(&1024.0) as u32;

@@ -6,6 +6,7 @@ import {
   Contrast,
   Palette,
   SunMoon,
+  Grid3x3,
   Maximize2,
   RotateCw,
   Upload,
@@ -80,6 +81,13 @@ const OPERATIONS: Operation[] = [
     cliFlag: "--invert",
     icon: SunMoon,
     params: [{ key: "enabled", label: "Apply", type: "boolean", min: 0, max: 1, step: 1, default: 0 }],
+  },
+  {
+    id: "pixelate",
+    label: "Pixelate",
+    cliFlag: "--pixelate",
+    icon: Grid3x3,
+    params: [{ key: "blockSize", label: "Block size", type: "range", min: 1, max: 50, step: 1, default: 8, unit: "px" }],
   },
   {
     id: "resize",
@@ -248,8 +256,7 @@ function App() {
   const displayedUrl = previewMode === "result" && processedUrl ? processedUrl : imageUrl;
 
   return (
-    <main className="flex h-screen w-screen bg-background text-foreground font-sans">
-      {/* Sidebar */}
+    <main className="flex h-full w-full bg-background text-foreground font-sans">
       <aside className="w-[320px] shrink-0 border-r border-border bg-card flex flex-col overflow-y-auto">
         <div className="px-5 py-4 border-b border-border">
           <h1 className="text-sm font-medium tracking-tight">transpic</h1>
@@ -293,7 +300,6 @@ function App() {
           </button>
         </div>
 
-        {/* Operations */}
         <div className="px-4 pt-5">
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground mb-2 px-1">
             Operations · {activeOps.length} active
@@ -387,7 +393,6 @@ function App() {
           </div>
         </div>
 
-        {/* Output format */}
         <div className="px-5 pt-5 mt-5 border-t border-border space-y-3">
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground pt-1">Output format</div>
           <select
@@ -411,7 +416,6 @@ function App() {
           </div>
         )}
 
-        {/* CLI preview */}
         <div className="px-4 pb-3">
           <button
             onClick={copyCommand}
@@ -428,7 +432,6 @@ function App() {
           </button>
         </div>
 
-        {/* Actions */}
         <div className="px-4 pb-4 space-y-2">
           <Button onClick={processImage} disabled={!imageUrl || isProcessing} className="w-full">
             {isProcessing && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
@@ -441,8 +444,7 @@ function App() {
         </div>
       </aside>
 
-      {/* Preview */}
-      <section className="flex-1 flex flex-col min-w-0">
+      <section className="flex-1 flex flex-col min-w-0 min-h-0">
         {imageUrl && (
           <div className="h-12 shrink-0 border-b border-border flex items-center justify-between px-5">
             <div className="flex items-center gap-2 min-w-0 text-xs">
@@ -473,7 +475,7 @@ function App() {
           </div>
         )}
 
-        <div className="flex-1 flex items-center justify-center p-8 checker-bg">
+        <div className="flex-1 flex items-center justify-center p-8 checker-bg min-h-0 min-w-0">
           {displayedUrl ? (
             <img
               src={displayedUrl}
