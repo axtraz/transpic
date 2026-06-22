@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/axtraz/transpic/compare/core-v0.4.0...core-v0.5.0) (2026-06-21)
+
+
+### Features
+
+* **core:** add pixelate operation ([ed06eed](https://github.com/axtraz/transpic/commit/ed06eed42e02912d4a1628eb42af701e71183216))
+* **core:** add pixelate operation ([5a7b5f7](https://github.com/axtraz/transpic/commit/5a7b5f7c1f06b3e7c2f43ec6059a2316e0339066))
+
 ## [0.4.0](https://github.com/axtraz/transpic/compare/core-v0.3.3...core-v0.4.0) (2026-06-21)
 
 

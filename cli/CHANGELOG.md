@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/axtraz/transpic/compare/cli-v0.4.0...cli-v0.5.0) (2026-06-21)
+
+
+### Features
+
+* **core:** add pixelate operation ([ed06eed](https://github.com/axtraz/transpic/commit/ed06eed42e02912d4a1628eb42af701e71183216))
+
 ## [0.4.0](https://github.com/axtraz/transpic/compare/cli-v0.3.2...cli-v0.4.0) (2026-06-21)
 
 
