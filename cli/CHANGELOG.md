@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/axtraz/transpic/compare/cli-v0.5.0...cli-v0.6.0) (2026-06-22)
+
+
+### Features
+
+* **cli:** add --unsharpen flag ([5a0154d](https://github.com/axtraz/transpic/commit/5a0154d0fcfff4b76981356974b7db3a65bd1847))
+* **cli:** remove examples ([c058359](https://github.com/axtraz/transpic/commit/c0583592e21814908045b2c82fae89eb26c140d4))
+
 ## [0.5.0](https://github.com/axtraz/transpic/compare/cli-v0.4.0...cli-v0.5.0) (2026-06-21)
 
 
