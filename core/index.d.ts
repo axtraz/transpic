@@ -31,6 +31,12 @@ export interface ImageOptions {
    */
   rotate?: number
   /**
+   * Sharpens the image using an unsharp mask. Tuple of `(sigma, threshold)`:
+   * `sigma` controls the blur radius, `threshold` limits sharpening to
+   * edges above a minimum brightness difference.
+   */
+  unsharpen?: Array<number>
+  /**
    * Output format identifier (e.g. `"png"`, `"ico"`, `"webp"`). Falls back
    * to the source image's detected format if omitted.
    */

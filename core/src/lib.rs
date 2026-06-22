@@ -14,6 +14,7 @@ pub mod invert;
 pub mod pixelate;
 pub mod resize;
 pub mod rotate;
+pub mod unsharpen;
 
 /// Some output formats impose hard dimension caps (e.g. .ico is limited to
 /// 256x256 per frame). This downscales (never upscales) the image to fit
@@ -53,6 +54,10 @@ pub struct ImageOptions {
   /// Rotation in degrees. Implementations typically only support
   /// multiples of 90.
   pub rotate: Option<u32>,
+  /// Sharpens the image using an unsharp mask. Tuple of `(sigma, threshold)`:
+  /// `sigma` controls the blur radius, `threshold` limits sharpening to
+  /// edges above a minimum brightness difference.
+  pub unsharpen: Option<Vec<f64>>,
   /// Output format identifier (e.g. `"png"`, `"ico"`, `"webp"`). Falls back
   /// to the source image's detected format if omitted.
   pub output_format: Option<String>,
@@ -131,6 +136,13 @@ pub fn process_image(input_path: String, options: ImageOptions) -> Result<String
   if let Some(rotation) = options.rotate {
     img = rotate::rotate(img, rotation)
       .map_err(|e| NapiError::new(Status::GenericFailure, e.to_string()))?;
+  }
+
+  if let Some(unsharpen_opts) = options.unsharpen {
+    let sigma = unsharpen_opts.get(0).copied().unwrap_or(2.0) as f32;
+    let threshold = unsharpen_opts.get(1).copied().unwrap_or(0.0) as i32;
+    img = unsharpen::unsharpen(img, sigma, threshold)
+      .map_err(|e| NapiError::new(Status::GenericFailure, e))?;
   }
 
   let out_fmt = if let Some(fmt_str) = &options.output_format {
