@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/axtraz/transpic/compare/v0.2.0...v0.3.0) (2026-06-22)
+
+
+### Features
+
+* **cli:** add --unsharpen flag ([5a0154d](https://github.com/axtraz/transpic/commit/5a0154d0fcfff4b76981356974b7db3a65bd1847))
+
+
+### Bug Fixes
+
+* add fs and dialog permissions for image download ([fd7b5c0](https://github.com/axtraz/transpic/commit/fd7b5c09c5720b094962720a16668be255cfa800))
+
 ## [0.2.0](https://github.com/axtraz/transpic/compare/v0.1.1...v0.2.0) (2026-06-21)
 
 
