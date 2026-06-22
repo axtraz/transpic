@@ -170,6 +170,26 @@ Error: Failed to write data to file: <error>
 
 The `--brightness` and `--huerotate` options can return validation errors from `transpic-core` if the provided value is out of the expected range. If you see an error mentioning brightness or hue rotation, try a smaller value (e.g. between `-100` and `100`) and gradually adjust from there.
 
+### Pixelate: block size too large
+
+```text
+Error: block size must be smaller than image dimensions
+```
+
+This happens when the `--pixelate` block size is larger than or equal to the image width or height. The pixelation method requires the block size to fit within the image boundaries.
+
+**Fix:** use a smaller block size, or resize the image first before applying pixelation.
+
+### Unsharpen: invalid sigma
+
+```text
+Error: sigma must be greater than 0
+```
+
+A sigma of `0` or a negative value makes the unsharp mask mathematically undefined.
+
+**Fix:** use a positive value for sigma (e.g. `1.5`).
+
 ## Still stuck?
 
 If your error isn't listed here, run the command again and copy the full red error message — it comes directly from `transpic-core` and usually includes the underlying I/O or codec error, which is helpful for debugging. You can then open an issue on the [GitHub repository](https://github.com) with:

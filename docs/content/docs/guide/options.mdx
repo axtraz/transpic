@@ -15,7 +15,7 @@ transpic --path <PATH> [OPTIONS]
 
 <Callout type="warn">
     At least one transformation option (`--format`, `--blur`, `--brightness`, `--grayscale`, `--huerotate`, `--invert`,
-    `--resize`, or `--rotate`) is required. Running `transpic --path image.png` alone returns an error.
+    `--pixelate`, `--resize`, `--rotate`, or `--unsharpen`) is required. Running `transpic --path image.png` alone returns an error.
 </Callout>
 
 ## Reference
@@ -26,11 +26,13 @@ transpic --path <PATH> [OPTIONS]
 | `--format <FORMAT>`         | string  | No       | Output format (e.g. `png`, `jpeg`, `webp`). Defaults to the input image's format if omitted. |
 | `--blur <SIGMA>`            | float   | No       | Gaussian blur intensity (standard deviation).                                                |
 | `--brightness <VALUE>`      | integer | No       | Brightness adjustment. Positive values brighten, negative values darken.                     |
-| `--grayscale` | boolean | No       | Converts the image to grayscale.                                                             |
+| `--grayscale`               | boolean | No       | Converts the image to grayscale.                                                             |
 | `--huerotate <DEGREES>`     | integer | No       | Rotates the image's hue by the given number of degrees.                                      |
-| `--invert`    | boolean | No       | Inverts the image's colors.                                                                  |
-| `--resize <WIDTHxHEIGHT>`   | string  | No       | Resizes the image to the given dimensions, e.g. `800x600`.                                   |
+| `--invert`                  | boolean | No       | Inverts the image's colors.                                                                  |
+| `--pixelate <BLOCK_SIZE>`   | integer | No       | Pixelates the image using the given block size in pixels.                                    |
+| `--resize <WIDTHxHEIGHT>`  | string  | No       | Resizes the image to the given dimensions, e.g. `800x600`.                                   |
 | `--rotate <ANGLE>`          | integer | No       | Rotates the image. Only `90`, `180`, and `270` are accepted.                                 |
+| `--unsharpen <SIGMA>`       | float   | No       | Sharpens the image using an unsharp mask with the given sigma and threshold.                 |
 | `-V, --version`             | flag    | No       | Prints the CLI version.                                                                      |
 | `-h, --help`                | flag    | No       | Prints help information.                                                                     |
 
@@ -79,6 +81,14 @@ Degrees can be any integer; values outside `0–360` wrap around:
 transpic --path photo.png --huerotate 90
 ```
 
+### `--pixelate`
+
+Takes a positive integer block size. Larger values produce a coarser pixelation effect. The block size must be smaller than the image dimensions:
+
+```bash
+transpic --path photo.png --pixelate 16
+```
+
 ### `--resize`
 
 Must follow the `WIDTHxHEIGHT` format with positive integers and a lowercase `x` separator:
@@ -93,6 +103,14 @@ Only `90`, `180`, and `270` degrees are supported (any other value returns an er
 
 ```bash
 transpic --path photo.png --rotate 180
+```
+
+### `--unsharpen`
+
+Takes a floating point sigma value controlling the blur radius of the mask, and an optional threshold. Higher sigma values produce a wider sharpening effect:
+
+```bash
+transpic --path photo.png --unsharpen [2,5]
 ```
 
 ## Combining options
