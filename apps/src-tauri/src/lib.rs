@@ -6,6 +6,7 @@ use std::io::Cursor;
 
 use transpic_core::{
     blur, brighten, clamp_for_format, grayscale, huerotate, invert, pixelate, resize, rotate,
+    unsharpen,
 };
 
 #[derive(Deserialize)]
@@ -106,6 +107,11 @@ fn process_image(
                 let degrees = *op.params.get("degrees").unwrap_or(&90.0) as u32;
                 rotate::rotate(img, degrees).map_err(|e| e.to_string())?
             }
+            "unsharpen" => {
+                let sigma = *op.params.get("sigma").unwrap_or(&1.5) as f32;
+                let threshold = *op.params.get("threshold").unwrap_or(&5.0) as i32;
+                unsharpen::unsharpen(img, sigma, threshold).map_err(|e| e.to_string())?
+            }
             other => return Err(format!("unknown operation: {other}")),
         };
     }
@@ -116,6 +122,8 @@ fn process_image(
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![process_image])
         .run(tauri::generate_context!())

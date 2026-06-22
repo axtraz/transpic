@@ -50,6 +50,12 @@ struct Cli {
         help = "Rotation angle in degrees (90, 180, or 270), example: --rotate 180"
     )]
     rotate: Option<u32>,
+
+    #[arg(
+        long,
+        help = "Sharpen the image using unsharp mask, example: --unsharpen 2.0,5"
+    )]
+    unsharpen: Option<String>,
 }
 
 fn main() {
@@ -72,11 +78,19 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         && cli.pixelate.is_none()
         && cli.resize.is_none()
         && cli.rotate.is_none()
+        && cli.unsharpen.is_none()
     {
         return Err(
             "You must specify at least one action (e.g., --grayscale, --blur 2, etc.).".into(),
         );
     }
+
+    let unsharpen = cli.unsharpen.map(|s| {
+        let parts: Vec<f64> = s.split(',')
+            .filter_map(|v| v.parse().ok())
+            .collect();
+        parts
+    });
 
     let options = ImageOptions {
         blur: cli.blur.map(|b| b as f64),
@@ -87,6 +101,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         pixelate: cli.pixelate,
         resize: cli.resize,
         rotate: cli.rotate,
+        unsharpen: unsharpen,
         output_format: cli.format,
     };
 

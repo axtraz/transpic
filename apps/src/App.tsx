@@ -17,12 +17,14 @@ import {
   X,
   Download,
   ChevronDown,
+  ScanSearch
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
+import { downloadImage } from "@/lib/download";
 import "./App.css";
 
 type ParamType = "range" | "number" | "boolean";
@@ -106,6 +108,16 @@ const OPERATIONS: Operation[] = [
     icon: RotateCw,
     params: [{ key: "degrees", label: "Degrees", type: "range", min: 0, max: 359, step: 1, default: 90, unit: "°" }],
   },
+  {
+  id: "unsharpen",
+  label: "Unsharpen",
+  cliFlag: "--unsharpen",
+  icon: ScanSearch,
+  params: [
+    { key: "sigma", label: "Sigma", type: "range", min: 0.1, max: 10, step: 0.1, default: 1.5, unit: "" },
+    { key: "threshold", label: "Threshold", type: "range", min: 0, max: 100, step: 1, default: 5 },
+  ],
+},
 ];
 
 const FORMATS = [
@@ -245,13 +257,7 @@ function App() {
     }
   };
 
-  const downloadResult = () => {
-    if (!processedUrl) return;
-    const a = document.createElement("a");
-    a.href = processedUrl;
-    a.download = `${imageName?.split(".")[0] ?? "transpic-output"}.${format}`;
-    a.click();
-  };
+  const downloadResult = () => downloadImage(processedUrl!, imageName, format);
 
   const displayedUrl = previewMode === "result" && processedUrl ? processedUrl : imageUrl;
 
