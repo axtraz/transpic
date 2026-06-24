@@ -87,6 +87,5 @@ coverage/
 *.pem
 
 # Global
-**/Cargo.lock
 **/bin
 *.node
