@@ -29,7 +29,7 @@
       "changelog-path": "CHANGELOG.md"
     },
     "apps": {
-      "release-type": "node",
+      "release-type": "rust",
       "component": "",
       "include-component-in-tag": false,
       "changelog-path": "CHANGELOG.md"
