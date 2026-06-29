@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/axtraz/transpic/compare/core-v0.5.0...core-v0.6.0) (2026-06-22)
+
+
+### Features
+
+* **core:** add unsharpen operation ([64f508d](https://github.com/axtraz/transpic/commit/64f508d0f0c35aec003a9e60cb35f65a0be699d1))
+
 ## [0.5.0](https://github.com/axtraz/transpic/compare/core-v0.4.0...core-v0.5.0) (2026-06-21)
 
 

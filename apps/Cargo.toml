@@ -1,0 +1,20 @@
+[package]
+name = "transpic_apps"
+version = "0.3.0"
+edition = "2024"
+
+[dependencies]
+egui = "0.35.0"
+eframe = { version = "0.35.0", features = ["persistence"] }
+egui_extras = { version = "0.35.0", features = ["image", "file"] }
+serde = { version = "1.0.228", features = ["derive"] }
+env_logger = "0.11.11"
+image = { version = "0.25.10", features = ["png"] }
+rfd = "0.17.2"
+transpic_core = { path = "../core" }
+
+[profile.release]
+opt-level = 2
+
+[profile.dev.package."*"]
+opt-level = 2
