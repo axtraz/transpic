@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/axtraz/transpic/compare/core-v0.6.0...core-v0.6.1) (2026-06-29)
+
+
+### Bug Fixes
+
+* remove Cargo.lock from .gitignore ([6ce4769](https://github.com/axtraz/transpic/commit/6ce476966ddd9356048c22fe37b609bf322bcde6))
+
 ## [0.6.0](https://github.com/axtraz/transpic/compare/core-v0.5.0...core-v0.6.0) (2026-06-22)
 
 
