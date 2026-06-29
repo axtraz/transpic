@@ -144,7 +144,7 @@ jobs:
           if-no-files-found: error
 
   publish-apps:
-    if: "!startsWith(github.event.release.tag_name, 'core-v') && !startsWith(github.event.release.tag_name, 'cli-v')"
+    if: startsWith(github.event.release.tag_name, 'apps-v')
     name: Build & release app (${{ matrix.os }})
     permissions:
       contents: write
@@ -154,17 +154,17 @@ jobs:
         include:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            binary: transpic.exe # ← adapte au nom dans Cargo.toml [[bin]]
+            binary: transpic_apps.exe
             asset_name: transpic-windows-x64.exe
 
           - os: macos-latest
             target: aarch64-apple-darwin
-            binary: transpic
+            binary: transpic_apps
             asset_name: transpic-macos-aarch64
 
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            binary: transpic
+            binary: transpic_apps
             asset_name: transpic-linux-x64
 
     runs-on: ${{ matrix.os }}
@@ -195,9 +195,9 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            cp apps/target/${{ matrix.target }}/release/${{ matrix.binary }} ${{ matrix.asset_name }}
+            cp apps/target/${{ matrix.target }}/release/transpic_apps.exe ${{ matrix.asset_name }}
           else
-            cp apps/target/${{ matrix.target }}/release/${{ matrix.binary }} ${{ matrix.asset_name }}
+            cp apps/target/${{ matrix.target }}/release/transpic_apps ${{ matrix.asset_name }}
           fi
 
       - name: Upload to release
