@@ -1,0 +1,38 @@
+{
+  "menu": {
+    "file": "Fichier",
+    "import": "Importer",
+    "download": "Télécharger",
+    "operations": "Opérations",
+    "settings": "Paramètres"
+  },
+  "operations": {
+    "blur": "Flou",
+    "brightness": "Luminosité",
+    "grayscale": "Niveaux de gris",
+    "hue_rotate": "Teinte",
+    "invert": "Inverser",
+    "pixelate": "Pixeliser",
+    "resize": "Redimensionner",
+    "rotate": "Rotation"
+  },
+  "panel": {
+    "apply": "Appliquer",
+    "download": "Télécharger",
+    "enable": "Activer",
+    "sigma": "sigma",
+    "amount": "quantité",
+    "degree": "°",
+    "px": "px",
+    "width_prefix": "L : ",
+    "height_prefix": "H : ",
+    "resize_note": "Remarque : l''aperçu n''affiche pas les dimensions réelles, mais l''image est correctement redimensionnée",
+    "close": "X"
+  },
+  "central": {
+    "placeholder": "Importez une image pour commencer"
+  },
+  "dialog": {
+    "images_filter": "Images"
+  }
+}

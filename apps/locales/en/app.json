@@ -1,0 +1,38 @@
+{
+  "menu": {
+    "file": "File",
+    "import": "Import",
+    "download": "Download",
+    "operations": "Operations",
+    "settings": "Settings"
+  },
+  "operations": {
+    "blur": "Blur",
+    "brightness": "Brightness",
+    "grayscale": "Grayscale",
+    "hue_rotate": "Hue Rotate",
+    "invert": "Invert",
+    "pixelate": "Pixelate",
+    "resize": "Resize",
+    "rotate": "Rotate"
+  },
+  "panel": {
+    "apply": "Apply",
+    "download": "Download",
+    "enable": "Enable",
+    "sigma": "sigma",
+    "amount": "amount",
+    "degree": "°",
+    "px": "px",
+    "width_prefix": "W: ",
+    "height_prefix": "H: ",
+    "resize_note": "Note: The preview doesn''t show the true dimensions, but the image is resized correctly",
+    "close": "X"
+  },
+  "central": {
+    "placeholder": "Import an image to begin"
+  },
+  "dialog": {
+    "images_filter": "Images"
+  }
+}
