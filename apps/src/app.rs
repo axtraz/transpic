@@ -1,5 +1,7 @@
+use crate::{Locale, set_current_locale};
 use image::DynamicImage;
 use rfd::FileDialog;
+use rust_intl::t;
 use transpic_core::{blur, brighten, grayscale, huerotate, invert, pixelate, resize, rotate};
 
 #[derive(serde::Deserialize, serde::Serialize)]
@@ -170,8 +172,19 @@ impl eframe::App for TemplateApp {
 
         egui::Panel::top("top_panel").show(ui, |ui| {
             egui::MenuBar::new().ui(ui, |ui| {
-                ui.menu_button("File", |ui| {
-                    if ui.button("Import").clicked() {
+                ui.menu_button(t!("app.menu.settings"), |ui| {
+                    if ui.button("English").clicked() {
+                        set_current_locale(Locale::En);
+                        ui.close();
+                    }
+                    if ui.button("Français").clicked() {
+                        set_current_locale(Locale::Fr);
+                        ui.close();
+                    }
+                });
+
+                ui.menu_button(t!("app.menu.file"), |ui| {
+                    if ui.button(t!("app.menu.import")).clicked() {
                         if let Some(path) = FileDialog::new()
                             .add_filter(
                                 "Images",
@@ -189,7 +202,7 @@ impl eframe::App for TemplateApp {
                         }
                         ui.close();
                     }
-                    if ui.button("Download").clicked() {
+                    if ui.button(t!("app.menu.download")).clicked() {
                         if let Some(img) = &self.processed_image {
                             Self::download_dialog(img);
                         }
@@ -197,32 +210,32 @@ impl eframe::App for TemplateApp {
                     }
                 });
 
-                ui.menu_button("Operations", |ui| {
-                    if ui.button("Blur").clicked() {
+                ui.menu_button(t!("app.menu.operations"), |ui| {
+                    if ui.button(t!("app.operations.blur")).clicked() {
                         self.show_blur = !self.show_blur;
                         ui.close();
                     }
-                    if ui.button("Brightness").clicked() {
+                    if ui.button(t!("app.operations.brightness")).clicked() {
                         self.show_brightness = !self.show_brightness;
                         ui.close();
                     }
-                    if ui.button("Grayscale").clicked() {
+                    if ui.button(t!("app.operations.grayscale")).clicked() {
                         self.show_grayscale = !self.show_grayscale;
                         ui.close();
                     }
-                    if ui.button("Hue Rotate").clicked() {
+                    if ui.button(t!("app.operations.hue_rotate")).clicked() {
                         self.show_huerotate = !self.show_huerotate;
                         ui.close();
                     }
-                    if ui.button("Invert").clicked() {
+                    if ui.button(t!("app.operations.invert")).clicked() {
                         self.show_invert = !self.show_invert;
                         ui.close();
                     }
-                    if ui.button("Pixelate").clicked() {
+                    if ui.button(t!("app.operations.pixelate")).clicked() {
                         self.show_pixelate = !self.show_pixelate;
                         ui.close();
                     }
-                    if ui.button("Resize").clicked() {
+                    if ui.button(t!("app.operations.resize")).clicked() {
                         self.show_resize = !self.show_resize;
                         if self.show_resize {
                             if let Some(img) = &self.processed_image {
@@ -237,14 +250,41 @@ impl eframe::App for TemplateApp {
                         }
                         ui.close();
                     }
-                    if ui.button("Rotate").clicked() {
+                    if ui.button(t!("app.operations.rotate")).clicked() {
                         self.show_rotate = !self.show_rotate;
                         ui.close();
                     }
                 });
 
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                    egui::widgets::global_theme_preference_buttons(ui);
+                    let mut theme = ui.ctx().options(|opt| opt.theme_preference);
+                    let mut changed = false;
+
+                    changed |= ui
+                        .selectable_value(
+                            &mut theme,
+                            egui::ThemePreference::System,
+                            t!("theme.system"),
+                        )
+                        .changed();
+                    changed |= ui
+                        .selectable_value(
+                            &mut theme,
+                            egui::ThemePreference::Light,
+                            t!("theme.light"),
+                        )
+                        .changed();
+                    changed |= ui
+                        .selectable_value(
+                            &mut theme,
+                            egui::ThemePreference::Dark,
+                            t!("theme.dark"),
+                        )
+                        .changed();
+
+                    if changed {
+                        ui.ctx().set_theme(theme);
+                    }
                 });
             });
         });
@@ -261,7 +301,7 @@ impl eframe::App for TemplateApp {
                             if ui
                                 .add_sized(
                                     [ui.available_width(), 32.0],
-                                    egui::Button::new("Apply"),
+                                    egui::Button::new(t!("app.panel.apply")),
                                 )
                                 .clicked()
                             {
@@ -274,7 +314,7 @@ impl eframe::App for TemplateApp {
                                 if ui
                                     .add_sized(
                                         [ui.available_width(), 32.0],
-                                        egui::Button::new("Download"),
+                                        egui::Button::new(t!("app.panel.download")),
                                     )
                                     .clicked()
                                 {
@@ -290,61 +330,76 @@ impl eframe::App for TemplateApp {
                         ui.add_space(6.0);
 
                         if self.show_blur {
-                            section_header(ui, "Blur", &mut self.show_blur);
-                            ui.add(
-                                egui::Slider::new(&mut self.blur, 0.0..=50.0).text("sigma"),
-                            );
+                            section_header(ui, &t!("app.operations.blur"), &mut self.show_blur);
+                            ui.add(egui::Slider::new(&mut self.blur, 0.0..=50.0).text("sigma"));
                             ui.separator();
                         }
                         if self.show_brightness {
-                            section_header(ui, "Brightness", &mut self.show_brightness);
+                            section_header(
+                                ui,
+                                &t!("app.operations.brightness"),
+                                &mut self.show_brightness,
+                            );
                             ui.add(
                                 egui::Slider::new(&mut self.brightness, -100..=100)
-                                    .text("amount"),
+                                    .text(t!("app.panel.amount")),
                             );
                             ui.separator();
                         }
                         if self.show_grayscale {
-                            section_header(ui, "Grayscale", &mut self.show_grayscale);
+                            section_header(
+                                ui,
+                                &t!("app.operations.grayscale"),
+                                &mut self.show_grayscale,
+                            );
                             ui.checkbox(&mut self.grayscale, "Enable");
                             ui.separator();
                         }
                         if self.show_huerotate {
-                            section_header(ui, "Hue Rotate", &mut self.show_huerotate);
-                            ui.add(
-                                egui::Slider::new(&mut self.huerotate, 0..=360).text("°"),
+                            section_header(
+                                ui,
+                                &t!("app.operations.hue_rotate"),
+                                &mut self.show_huerotate,
                             );
+                            ui.add(egui::Slider::new(&mut self.huerotate, 0..=360).text("°"));
                             ui.separator();
                         }
                         if self.show_invert {
-                            section_header(ui, "Invert", &mut self.show_invert);
-                            ui.checkbox(&mut self.invert, "Enable");
+                            section_header(ui, &t!("app.operations.invert"), &mut self.show_invert);
+                            ui.checkbox(&mut self.invert, t!("app.panel.enable"));
                             ui.separator();
                         }
                         if self.show_pixelate {
-                            section_header(ui, "Pixelate", &mut self.show_pixelate);
+                            section_header(
+                                ui,
+                                &t!("app.operations.pixelate"),
+                                &mut self.show_pixelate,
+                            );
                             ui.add(
-                                egui::Slider::new(&mut self.pixelate, 1..=50).text("px"),
+                                egui::Slider::new(&mut self.pixelate, 1..=50)
+                                    .text(t!("app.panel.px")),
                             );
                             ui.separator();
                         }
                         if self.show_resize {
-                            section_header(ui, "Resize", &mut self.show_resize);
+                            section_header(ui, &t!("app.operations.resize"), &mut self.show_resize);
                             ui.add(
-                                egui::DragValue::new(&mut self.resize_width).prefix("W: "),
+                                egui::DragValue::new(&mut self.resize_width)
+                                    .prefix(t!("app.panel.width_prefix")),
                             );
                             ui.add(
-                                egui::DragValue::new(&mut self.resize_height).prefix("H: "),
+                                egui::DragValue::new(&mut self.resize_height)
+                                    .prefix(t!("app.panel.height_prefix")),
                             );
-                            ui.label("Note: The preview doesn't show the true dimensions, but the image is resized correctly");
+                            ui.label(t!("app.panel.resize_note"));
                             ui.separator();
                         }
                         if self.show_rotate {
-                            section_header(ui, "Rotate", &mut self.show_rotate);
+                            section_header(ui, &t!("app.operations.rotate"), &mut self.show_rotate);
                             ui.add(
                                 egui::Slider::new(&mut self.rotate, 0..=270)
                                     .step_by(90.0)
-                                    .text("°"),
+                                    .text(t!("app.panel.degree")),
                             );
                             ui.separator();
                         }
@@ -367,7 +422,7 @@ impl eframe::App for TemplateApp {
                             .max_size(egui::vec2(512.0, 512.0)),
                     );
                 } else {
-                    ui.label("Import an image to begin");
+                    ui.label(t!("app.central.placeholder"));
                 }
             });
         });
@@ -378,7 +433,7 @@ fn section_header(ui: &mut egui::Ui, title: &str, flag: &mut bool) {
     ui.horizontal(|ui| {
         ui.label(egui::RichText::new(title).strong());
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-            if ui.button("X").clicked() {
+            if ui.button(t!("app.panel.close")).clicked() {
                 *flag = false;
             }
         });
