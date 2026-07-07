@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/axtraz/transpic/compare/apps-v0.5.0...apps-v0.6.0) (2026-07-07)
+
+
+### Features
+
+* add translations system ([12a7778](https://github.com/axtraz/transpic/commit/12a7778147fde4eebd378de7f38ab342f894ca58))
+* **apps:** add json translations file ([59cd9b4](https://github.com/axtraz/transpic/commit/59cd9b44198c9c20f45e7e2b94070c918c39b231))
+
 ## [0.5.0](https://github.com/axtraz/transpic/compare/apps-v0.4.1...apps-v0.5.0) (2026-06-29)
 
 
