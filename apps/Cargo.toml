@@ -1,6 +1,6 @@
 [package]
 name = "transpic_apps"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2024"
 
 [dependencies]
@@ -12,6 +12,7 @@ env_logger = "0.11.11"
 image = { version = "0.25.10", features = ["png"] }
 rfd = "0.17.2"
 transpic_core = { path = "../core" }
+rust_intl = "0.2.1"
 
 [profile.release]
 opt-level = 2
